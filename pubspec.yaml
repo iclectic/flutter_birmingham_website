@@ -1,0 +1,51 @@
+name: flutter_birmingham_website
+description: "Flutter Birmingham community website — Flutter and Dart meetup in Birmingham, UK."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.11.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Routing
+  go_router: ^14.6.2
+
+  # Fonts
+  google_fonts: ^6.2.1
+
+  # SVG support
+  flutter_svg: ^2.0.10+1
+
+  # URL launching
+  url_launcher: ^6.3.1
+
+  # State management
+  flutter_riverpod: ^2.6.1
+
+  # Animations
+  visibility_detector: ^0.4.0+2
+
+  # Markdown rendering (Code of Conduct page)
+  flutter_markdown: ^0.7.4
+  intl: ^0.20.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/images/events/
+    - assets/images/team/
+    - assets/images/sponsors/
+    - assets/images/gallery/
+    - assets/icons/
+    - assets/logos/

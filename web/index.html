@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Primary meta -->
+  <title>Flutter Birmingham | Flutter and Dart Community</title>
+  <meta name="description" content="Join Flutter Birmingham for Flutter and Dart talks, workshops, networking and community events in Birmingham, United Kingdom.">
+  <meta name="keywords" content="Flutter, Dart, Birmingham, meetup, community, mobile development, cross-platform">
+  <meta name="author" content="Flutter Birmingham">
+  <meta name="theme-color" content="#02569B">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://flutterbirmingham.dev/">
+  <meta property="og:title" content="Flutter Birmingham | Flutter and Dart Community">
+  <meta property="og:description" content="Join Flutter Birmingham for Flutter and Dart talks, workshops, networking and community events in Birmingham, United Kingdom.">
+  <meta property="og:image" content="icons/Icon-512.png">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:site_name" content="Flutter Birmingham">
+
+  <!-- Twitter / X -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Flutter Birmingham | Flutter and Dart Community">
+  <meta name="twitter:description" content="Join Flutter Birmingham for Flutter and Dart talks, workshops, networking and community events in Birmingham, United Kingdom.">
+  <meta name="twitter:image" content="icons/Icon-512.png">
+
+  <!-- iOS -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Flutter Birmingham">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="manifest" href="manifest.json">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: #071B2D;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+
+    #loading-screen {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      opacity: 1;
+      transition: opacity 0.4s ease-out;
+    }
+
+    #loading-screen.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .logo-mark {
+      width: 64px;
+      height: 64px;
+      animation: float 2s ease-in-out infinite;
+    }
+
+    .loading-title {
+      color: #ffffff;
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .loading-title span {
+      color: #13B9FD;
+    }
+
+    .loading-bar {
+      width: 160px;
+      height: 3px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .loading-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #0175C2, #13B9FD);
+      border-radius: 2px;
+      animation: load 1.8s ease-in-out forwards;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes load {
+      0% { width: 0%; }
+      60% { width: 75%; }
+      100% { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div id="loading-screen">
+    <svg class="logo-mark" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M32 2L62 32L32 62L2 32Z" fill="#02569B"/>
+      <path d="M32 16L48 32L32 48L16 32Z" fill="#0175C2"/>
+      <path d="M32 24L40 32L32 40L24 32Z" fill="#13B9FD"/>
+    </svg>
+    <p class="loading-title"><span>Flutter</span> Birmingham</p>
+    <div class="loading-bar"><div class="loading-bar-fill"></div></div>
+  </div>
+
+  <script src="flutter_bootstrap.js" async></script>
+  <script>
+    window.addEventListener('flutter-first-frame', function() {
+      var loader = document.getElementById('loading-screen');
+      if (loader) {
+        loader.classList.add('hidden');
+        setTimeout(function() { loader.style.display = 'none'; }, 450);
+      }
+    });
+  </script>
+</body>
+</html>
