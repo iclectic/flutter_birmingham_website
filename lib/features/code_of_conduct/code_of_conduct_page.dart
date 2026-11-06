@@ -44,8 +44,9 @@ class CodeOfConductPage extends StatelessWidget {
             maxWidth: AppSpacing.maxTextWidth + 120,
             child: Padding(
               padding: EdgeInsets.symmetric(
-                vertical:
-                    isMobile ? AppSpacing.sectionMobile : AppSpacing.section,
+                vertical: isMobile
+                    ? AppSpacing.sectionMobile
+                    : AppSpacing.section,
               ),
               child: Container(
                 padding: const EdgeInsets.all(AppSpacing.xxl),
@@ -72,38 +73,49 @@ class _CoCContent extends StatelessWidget {
     final theme = Theme.of(context);
 
     Widget h2(String text) => Padding(
-          padding: const EdgeInsets.only(top: AppSpacing.xl, bottom: AppSpacing.sm),
-          child: Text(text,
-              style: theme.textTheme.headlineSmall?.copyWith(
-                  color: AppColors.darkNavy, fontWeight: FontWeight.w700)),
-        );
+      padding: const EdgeInsets.only(top: AppSpacing.xl, bottom: AppSpacing.sm),
+      child: Text(
+        text,
+        style: theme.textTheme.headlineSmall?.copyWith(
+          color: AppColors.darkNavy,
+          fontWeight: FontWeight.w700,
+        ),
+      ),
+    );
 
     Widget body(String text) => Padding(
-          padding: const EdgeInsets.only(bottom: AppSpacing.sm),
-          child: Text(text,
-              style: theme.textTheme.bodyLarge?.copyWith(height: 1.8)),
-        );
+      padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+      child: Text(
+        text,
+        style: theme.textTheme.bodyLarge?.copyWith(height: 1.8),
+      ),
+    );
 
     Widget bullet(String text) => Padding(
-          padding: const EdgeInsets.only(left: AppSpacing.md, bottom: AppSpacing.xs),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Padding(
-                padding: EdgeInsets.only(top: 8),
-                child: CircleAvatar(
-                  radius: 3,
-                  backgroundColor: AppColors.flutterBlue,
-                ),
-              ),
-              const SizedBox(width: AppSpacing.sm),
-              Expanded(
-                child: Text(text,
-                    style: theme.textTheme.bodyLarge?.copyWith(height: 1.7)),
-              ),
-            ],
+      padding: const EdgeInsets.only(
+        left: AppSpacing.md,
+        bottom: AppSpacing.xs,
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Padding(
+            padding: EdgeInsets.only(top: 8),
+            child: CircleAvatar(
+              radius: 3,
+              backgroundColor: AppColors.flutterBlue,
+            ),
           ),
-        );
+          const SizedBox(width: AppSpacing.sm),
+          Expanded(
+            child: Text(
+              text,
+              style: theme.textTheme.bodyLarge?.copyWith(height: 1.7),
+            ),
+          ),
+        ],
+      ),
+    );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -131,22 +143,28 @@ class _CoCContent extends StatelessWidget {
         bullet('Show empathy and patience towards other community members.'),
         bullet('Respect differing viewpoints and experiences.'),
         bullet(
-            'Refrain from sharing others\' personal information without consent.'),
+          'Refrain from sharing others\' personal information without consent.',
+        ),
         h2('Unacceptable Behaviour'),
         body(
           'The following behaviours are considered unacceptable within our community:',
         ),
         bullet(
-            'Harassment of any kind, including offensive comments, deliberate intimidation, '
-            'stalking, following, unwanted photography or recording, sustained disruption, '
-            'inappropriate physical contact, and unwelcome sexual attention.'),
+          'Harassment of any kind, including offensive comments, deliberate intimidation, '
+          'stalking, following, unwanted photography or recording, sustained disruption, '
+          'inappropriate physical contact, and unwelcome sexual attention.',
+        ),
         bullet(
-            'Discriminatory jokes, language, or imagery related to any personal characteristic.'),
+          'Discriminatory jokes, language, or imagery related to any personal characteristic.',
+        ),
         bullet('Threatening or violent language directed at any person.'),
         bullet('Posting or displaying sexually explicit or violent material.'),
         bullet(
-            'Personal or political attacks, public or private, directed at community members.'),
-        bullet('Other conduct that could reasonably be considered inappropriate in a professional setting.'),
+          'Personal or political attacks, public or private, directed at community members.',
+        ),
+        bullet(
+          'Other conduct that could reasonably be considered inappropriate in a professional setting.',
+        ),
         h2('Event Conduct'),
         body(
           'At Flutter Birmingham events, attendees are expected to behave professionally and '
@@ -170,18 +188,24 @@ class _CoCContent extends StatelessWidget {
           ),
           child: Row(
             children: [
-              const Icon(Icons.email_outlined,
-                  color: AppColors.flutterBlue, size: 18),
+              const Icon(
+                Icons.email_outlined,
+                color: AppColors.flutterBlue,
+                size: 18,
+              ),
               const SizedBox(width: AppSpacing.sm),
               Text(
                 'conduct@flutterbirmingham.dev',
                 style: theme.textTheme.bodyMedium?.copyWith(
-                    color: AppColors.flutterBlue, fontWeight: FontWeight.w600),
+                  color: AppColors.flutterBlue,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               Text(
                 '  [PLACEHOLDER — replace with a real address before launch]',
-                style: theme.textTheme.bodySmall
-                    ?.copyWith(color: AppColors.neutralGrey),
+                style: theme.textTheme.bodySmall?.copyWith(
+                  color: AppColors.neutralGrey,
+                ),
               ),
             ],
           ),
@@ -220,8 +244,9 @@ class _CoCContent extends StatelessWidget {
             'This Code of Conduct was last updated in 2024 and will be reviewed annually. '
             'It is inspired by, but independent of, the Google Developer Community guidelines '
             'and the Contributor Covenant.',
-            style: theme.textTheme.bodySmall
-                ?.copyWith(color: AppColors.neutralGrey),
+            style: theme.textTheme.bodySmall?.copyWith(
+              color: AppColors.neutralGrey,
+            ),
           ),
         ),
       ],

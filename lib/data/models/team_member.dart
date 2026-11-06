@@ -1,4 +1,4 @@
-enum TeamRole { organiser, volunteer, contributor }
+enum TeamRole { organiser, coOrganiser }
 
 class TeamMember {
   const TeamMember({
@@ -7,11 +7,11 @@ class TeamMember {
     required this.role,
     required this.teamRole,
     required this.bio,
-    required this.photoAsset,
+    this.photoAsset,
     this.linkedInUrl,
     this.gitHubUrl,
-    this.twitterUrl,
     this.websiteUrl,
+    this.isPlaceholder = false,
   });
 
   final String id;
@@ -19,9 +19,11 @@ class TeamMember {
   final String role;
   final TeamRole teamRole;
   final String bio;
-  final String photoAsset;
+  final String? photoAsset;
   final String? linkedInUrl;
   final String? gitHubUrl;
-  final String? twitterUrl;
   final String? websiteUrl;
+
+  /// True for an open organiser slot that hasn't been filled yet.
+  final bool isPlaceholder;
 }

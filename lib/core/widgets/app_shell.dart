@@ -1,28 +1,25 @@
 import 'package:flutter/material.dart';
 
-import 'app_nav_bar.dart';
 import 'app_footer.dart';
+import 'app_nav_bar.dart';
 
 class AppShell extends StatelessWidget {
-  const AppShell({super.key, required this.child});
+  const AppShell({super.key, required this.location, required this.child});
 
+  final String location;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Column(
         children: [
           const AppNavBar(),
           Expanded(
+            // Keyed by path so each route starts scrolled to the top.
             child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  child,
-                  const AppFooter(),
-                ],
-              ),
+              key: ValueKey(location),
+              child: Column(children: [child, const AppFooter()]),
             ),
           ),
         ],

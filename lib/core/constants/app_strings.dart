@@ -1,39 +1,38 @@
 abstract final class AppStrings {
   static const String appName = 'Flutter Birmingham';
-  static const String appTagline =
-      'Bringing Birmingham\'s Flutter and Dart community together to learn, build and connect.';
-  static const String appDescription =
-      'Flutter Birmingham is an independent community for Flutter and Dart '
-      'developers based in Birmingham, United Kingdom. We run regular meetups '
-      'featuring technical talks, hands-on workshops, networking, and community '
-      'events open to everyone.';
+  static const String shortName = 'Flutter Brum';
+  static const String tagline =
+      'The Flutter & Dart community for Birmingham and the West Midlands.';
+  static const String description =
+      'Flutter Birmingham is a free, independent meetup for anyone building '
+      'with Flutter and Dart. We get together for talks, hands-on workshops '
+      'and good conversation — whether you shipped your first app last week '
+      'or have been building with Flutter since the beta.';
 
-  // SEO
-  static const String siteTitle = 'Flutter Birmingham | Flutter and Dart Community';
-  static const String siteDescription =
-      'Join Flutter Birmingham for Flutter and Dart talks, workshops, networking '
-      'and community events in Birmingham, United Kingdom.';
+  static const List<String> hashtags = [
+    '#FlutterBrum',
+    '#FlutterDev',
+    '#Dart',
+    '#ItsAllWidgets',
+    '#Birmingham',
+  ];
 
-  // External URLs — update these with the real community links
+  // TODO(organisers): replace placeholder links before launch.
   static const String meetupUrl = 'https://www.meetup.com/flutter-birmingham/';
-  static const String linkedInUrl = 'https://www.linkedin.com/company/flutter-birmingham/';
-  static const String youTubeUrl = 'https://www.youtube.com/@flutter-birmingham';
-  static const String gitHubUrl = 'https://github.com/flutter-birmingham';
+  static const String linkedInUrl =
+      'https://www.linkedin.com/company/flutter-birmingham/';
+  static const String youTubeUrl =
+      'https://www.youtube.com/@flutter-birmingham';
+  static const String gitHubUrl =
+      'https://github.com/iclectic/flutter_birmingham_website';
   static const String contactEmail = 'hello@flutterbirmingham.dev';
-
-  // Speaker form URL — replace with your actual speaker submission form
+  static const String conductEmail = 'conduct@flutterbirmingham.dev';
   static const String speakerFormUrl = 'https://forms.gle/your-speaker-form-id';
 
-  // Sponsorship enquiry URL — replace as needed
-  static const String sponsorshipUrl = 'mailto:sponsors@flutterbirmingham.dev';
-
-  // Footer disclaimer
   static const String independentNotice =
-      'Flutter Birmingham is an independent community group and is not owned, '
-      'operated, or officially endorsed by Google LLC or the Flutter team.';
+      'Flutter Birmingham is an independent community group. Flutter and the '
+      'related logo are trademarks of Google LLC. We are not endorsed by or '
+      'affiliated with Google LLC.';
 
-  static const String copyright = '© 2024–2026 Flutter Birmingham. All rights reserved.';
-
-  // Placeholder label used on placeholder assets / content
-  static const String placeholderLabel = '[PLACEHOLDER — replace before launch]';
+  static String get copyright => '© ${DateTime.now().year} Flutter Birmingham';
 }

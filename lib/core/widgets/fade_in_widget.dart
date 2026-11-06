@@ -26,15 +26,13 @@ class _FadeInWidgetState extends State<FadeInWidget>
   late final AnimationController _controller;
   late final Animation<double> _opacity;
   late final Animation<Offset> _slide;
+  final Key _detectorKey = UniqueKey();
   bool _hasAnimated = false;
 
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: widget.duration,
-    );
+    _controller = AnimationController(vsync: this, duration: widget.duration);
     _opacity = CurvedAnimation(parent: _controller, curve: Curves.easeOut);
     _slide = Tween<Offset>(
       begin: widget.offset / 40,
@@ -64,14 +62,11 @@ class _FadeInWidgetState extends State<FadeInWidget>
   @override
   Widget build(BuildContext context) {
     return VisibilityDetector(
-      key: widget.key ?? UniqueKey(),
+      key: _detectorKey,
       onVisibilityChanged: _onVisibilityChanged,
       child: FadeTransition(
         opacity: _opacity,
-        child: SlideTransition(
-          position: _slide,
-          child: widget.child,
-        ),
+        child: SlideTransition(position: _slide, child: widget.child),
       ),
     );
   }
