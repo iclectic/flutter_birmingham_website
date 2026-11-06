@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <base href="$FLUTTER_BASE_HREF">
 
@@ -7,130 +7,89 @@
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Primary meta -->
-  <title>Flutter Birmingham | Flutter and Dart Community</title>
-  <meta name="description" content="Join Flutter Birmingham for Flutter and Dart talks, workshops, networking and community events in Birmingham, United Kingdom.">
-  <meta name="keywords" content="Flutter, Dart, Birmingham, meetup, community, mobile development, cross-platform">
+  <title>Flutter Birmingham | Flutter &amp; Dart meetup</title>
+  <meta name="description" content="Flutter Birmingham is the free, independent Flutter and Dart community for Birmingham and the West Midlands. Talks, workshops and networking.">
   <meta name="author" content="Flutter Birmingham">
-  <meta name="theme-color" content="#02569B">
+  <meta name="theme-color" content="#0553B1">
   <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://flutterbirmingham.dev/">
 
-  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://flutterbirmingham.dev/">
-  <meta property="og:title" content="Flutter Birmingham | Flutter and Dart Community">
-  <meta property="og:description" content="Join Flutter Birmingham for Flutter and Dart talks, workshops, networking and community events in Birmingham, United Kingdom.">
-  <meta property="og:image" content="icons/Icon-512.png">
+  <meta property="og:title" content="Flutter Birmingham | Flutter &amp; Dart meetup">
+  <meta property="og:description" content="The Flutter &amp; Dart community for Birmingham and the West Midlands.">
+  <meta property="og:image" content="https://flutterbirmingham.dev/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:locale" content="en_GB">
   <meta property="og:site_name" content="Flutter Birmingham">
 
-  <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Flutter Birmingham | Flutter and Dart Community">
-  <meta name="twitter:description" content="Join Flutter Birmingham for Flutter and Dart talks, workshops, networking and community events in Birmingham, United Kingdom.">
-  <meta name="twitter:image" content="icons/Icon-512.png">
+  <meta name="twitter:title" content="Flutter Birmingham | Flutter &amp; Dart meetup">
+  <meta name="twitter:description" content="The Flutter &amp; Dart community for Birmingham and the West Midlands.">
+  <meta name="twitter:image" content="https://flutterbirmingham.dev/og-image.png">
 
-  <!-- iOS -->
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Flutter Birmingham">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Flutter Brum">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
-
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="manifest" href="manifest.json">
 
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
-      background-color: #071B2D;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      background: linear-gradient(180deg, #E7F8FF 0%, #FFFFFF 60%);
       min-height: 100vh;
-      font-family: system-ui, -apple-system, sans-serif;
+      font-family: "Google Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
     }
-
     #loading-screen {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 24px;
-      opacity: 1;
-      transition: opacity 0.4s ease-out;
+      position: fixed; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 20px;
+      transition: opacity .4s ease-out;
     }
-
-    #loading-screen.hidden {
-      opacity: 0;
-      pointer-events: none;
-    }
-
+    #loading-screen.hidden { opacity: 0; pointer-events: none; }
     .logo-mark {
-      width: 64px;
-      height: 64px;
+      width: 96px; height: 96px; border-radius: 24px;
+      box-shadow: 0 16px 40px rgba(5, 83, 177, .25);
       animation: float 2s ease-in-out infinite;
     }
-
-    .loading-title {
-      color: #ffffff;
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: -0.3px;
-    }
-
-    .loading-title span {
-      color: #13B9FD;
-    }
-
+    .loading-title { color: #1F1F1F; font-size: 22px; font-weight: 700; }
+    .loading-title span { color: #027DFD; }
     .loading-bar {
-      width: 160px;
-      height: 3px;
-      background: rgba(255,255,255,0.15);
-      border-radius: 2px;
-      overflow: hidden;
+      width: 160px; height: 4px; border-radius: 2px;
+      background: #DCF5FF; overflow: hidden;
     }
-
     .loading-bar-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, #0175C2, #13B9FD);
-      border-radius: 2px;
+      height: 100%; width: 0; border-radius: 2px;
+      background: linear-gradient(90deg, #0553B1, #027DFD, #54C5F8);
       animation: load 1.8s ease-in-out forwards;
     }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-
-    @keyframes load {
-      0% { width: 0%; }
-      60% { width: 75%; }
-      100% { width: 100%; }
+    @keyframes float { 50% { transform: translateY(-8px); } }
+    @keyframes load { 60% { width: 75%; } 100% { width: 100%; } }
+    @media (prefers-reduced-motion: reduce) {
+      .logo-mark, .loading-bar-fill { animation: none; }
+      .loading-bar-fill { width: 100%; }
     }
   </style>
 </head>
 <body>
-  <div id="loading-screen">
-    <svg class="logo-mark" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <path d="M32 2L62 32L32 62L2 32Z" fill="#02569B"/>
-      <path d="M32 16L48 32L32 48L16 32Z" fill="#0175C2"/>
-      <path d="M32 24L40 32L32 40L24 32Z" fill="#13B9FD"/>
-    </svg>
+  <div id="loading-screen" role="status" aria-label="Loading Flutter Birmingham">
+    <img class="logo-mark" src="icons/Icon-192.png" alt="" width="96" height="96">
     <p class="loading-title"><span>Flutter</span> Birmingham</p>
     <div class="loading-bar"><div class="loading-bar-fill"></div></div>
   </div>
+  <noscript>Flutter Birmingham needs JavaScript enabled to run.</noscript>
 
   <script src="flutter_bootstrap.js" async></script>
   <script>
-    window.addEventListener('flutter-first-frame', function() {
+    window.addEventListener('flutter-first-frame', function () {
       var loader = document.getElementById('loading-screen');
-      if (loader) {
-        loader.classList.add('hidden');
-        setTimeout(function() { loader.style.display = 'none'; }, 450);
-      }
+      if (!loader) return;
+      loader.classList.add('hidden');
+      setTimeout(function () { loader.remove(); }, 450);
     });
   </script>
 </body>

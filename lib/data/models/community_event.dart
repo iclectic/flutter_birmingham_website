@@ -33,8 +33,11 @@ class CommunityEvent {
   final bool isFeatured;
   final List<AgendaItem> agenda;
 
-  bool get isUpcoming => startDateTime.isAfter(DateTime.now());
-  bool get isPast => startDateTime.isBefore(DateTime.now());
+  bool isUpcomingAt([DateTime? now]) =>
+      endDateTime.isAfter(now ?? DateTime.now());
+  bool get isUpcoming => isUpcomingAt();
+  bool get isPast => !isUpcoming;
+  bool get hasImage => imageAsset.isNotEmpty;
   bool get hasRecording => videoUrl != null && videoUrl!.isNotEmpty;
   bool get hasSlides => slidesUrl != null && slidesUrl!.isNotEmpty;
 }

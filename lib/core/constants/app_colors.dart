@@ -1,21 +1,50 @@
 import 'package:flutter/material.dart';
 
+/// Palette aligned with flutter.dev and the Flutter brand.
 abstract final class AppColors {
-  static const Color flutterBlue = Color(0xFF02569B);
-  static const Color brightBlue = Color(0xFF0175C2);
-  static const Color lightBlue = Color(0xFF13B9FD);
-  static const Color darkNavy = Color(0xFF071B2D);
-  static const Color offWhite = Color(0xFFF7FAFC);
+  // Brand blues
+  static const Color navy = Color(0xFF042B59);
+  static const Color blue = Color(0xFF0553B1);
+  static const Color sky = Color(0xFF027DFD);
+  static const Color action = Color(0xFF1A68D3);
+  static const Color aqua = Color(0xFF54C5F8);
+  static const Color purple = Color(0xFF833EF2);
+
+  // Light tints (flutter.dev surfaces)
+  static const Color tint50 = Color(0xFFF3FCFF);
+  static const Color tint100 = Color(0xFFE7F8FF);
+  static const Color tint200 = Color(0xFFDCF5FF);
+  static const Color tint300 = Color(0xFFB8EAFE);
+
+  // Neutrals
   static const Color white = Color(0xFFFFFFFF);
-  static const Color neutralGrey = Color(0xFF52606D);
-  static const Color lightGrey = Color(0xFFE8EDF2);
-  static const Color cardBorder = Color(0xFFDDE3EA);
-  static const Color errorRed = Color(0xFFD32F2F);
-  static const Color successGreen = Color(0xFF388E3C);
-  static const Color gradientStart = Color(0xFF02569B);
-  static const Color gradientEnd = Color(0xFF071B2D);
-  static const Color heroGradientStart = Color(0xFF071B2D);
-  static const Color heroGradientMid = Color(0xFF02569B);
-  static const Color heroGradientEnd = Color(0xFF0175C2);
-  static const Color overlayDark = Color(0xCC071B2D);
+  static const Color ink = Color(0xFF1F1F1F);
+  static const Color body = Color(0xFF4A4A4A);
+  static const Color muted = Color(0xFF6B7280);
+  static const Color border = Color(0xFFDADCE0);
+  static const Color surfaceGrey = Color(0xFFF8F9FA);
+
+  static const Color errorRed = Color(0xFFD93025);
+
+  // Semantic aliases used across the app
+  static const Color flutterBlue = blue;
+  static const Color brightBlue = sky;
+  static const Color lightBlue = aqua;
+  static const Color darkNavy = navy;
+  static const Color offWhite = tint50;
+  static const Color neutralGrey = body;
+  static const Color lightGrey = surfaceGrey;
+  static const Color cardBorder = border;
+
+  static const LinearGradient brandGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [sky, blue],
+  );
+
+  static const LinearGradient darkGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [navy, blue],
+  );
 }

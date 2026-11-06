@@ -39,8 +39,8 @@ class ContentContainer extends StatelessWidget {
     final hPad = Breakpoints.isMobile(context)
         ? 20.0
         : Breakpoints.isTablet(context)
-            ? 32.0
-            : 48.0;
+        ? 32.0
+        : 48.0;
 
     return Center(
       child: ConstrainedBox(

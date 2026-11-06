@@ -5,102 +5,95 @@ import '../constants/app_colors.dart';
 import '../constants/app_spacing.dart';
 import '../constants/app_strings.dart';
 import '../responsive/breakpoints.dart';
+import '../../services/url_service.dart';
 import 'fb_logo.dart';
 
-class AppNavBar extends StatefulWidget {
+class NavItem {
+  const NavItem(this.label, this.route);
+  final String label;
+  final String route;
+
+  bool isActive(String location) => route == '/'
+      ? location == '/'
+      : location == route || location.startsWith('$route/');
+}
+
+const navItems = [
+  NavItem('Home', '/'),
+  NavItem('Events', '/events'),
+  NavItem('Team', '/team'),
+  NavItem('Code of Conduct', '/code-of-conduct'),
+];
+
+class AppNavBar extends StatelessWidget {
   const AppNavBar({super.key});
 
   @override
-  State<AppNavBar> createState() => _AppNavBarState();
-}
-
-class _AppNavBarState extends State<AppNavBar> {
-  final bool _scrolled = false;
-
-  static const _navItems = [
-    _NavItem('Home', '/'),
-    _NavItem('Events', '/events'),
-    _NavItem('About', '/about'),
-    _NavItem('Team', '/team'),
-    _NavItem('Gallery', '/gallery'),
-    _NavItem('Code of Conduct', '/code-of-conduct'),
-    _NavItem('Contact', '/contact'),
-  ];
-
-  void _openDrawer(BuildContext context) {
-    showModalBottomSheet<void>(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (_) => _MobileNavDrawer(navItems: _navItems),
-    );
-  }
-
-  @override
   Widget build(BuildContext context) {
-    final isMobile = Breakpoints.isMobile(context);
-    final isTablet = Breakpoints.isTablet(context);
-    final showHamburger = isMobile || isTablet;
-    final currentLocation = GoRouterState.of(context).uri.toString();
+    final compact = !Breakpoints.isDesktop(context);
+    final location = GoRouterState.of(context).uri.path;
 
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 200),
+    return Container(
       height: AppSpacing.navHeight,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: AppColors.white,
-        boxShadow: _scrolled
-            ? [
-                BoxShadow(
-                  color: AppColors.darkNavy.withAlpha(20),
-                  blurRadius: 16,
-                  offset: const Offset(0, 2),
-                )
-              ]
-            : [
-                BoxShadow(
-                  color: AppColors.cardBorder,
-                  blurRadius: 0,
-                  offset: const Offset(0, 1),
-                )
-              ],
+        border: Border(bottom: BorderSide(color: AppColors.border)),
       ),
       child: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: AppSpacing.maxContentWidth),
+          constraints: const BoxConstraints(
+            maxWidth: AppSpacing.maxContentWidth,
+          ),
           child: Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: isMobile ? 20 : 48,
+              horizontal: Breakpoints.isMobile(context) ? 20 : 48,
             ),
             child: Row(
               children: [
                 Semantics(
+                  link: true,
                   label: 'Flutter Birmingham home',
-                  child: GestureDetector(
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(8),
                     onTap: () => context.go('/'),
-                    child: const FBLogo(height: 36),
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 4),
+                      child: FBLogo(height: 40),
+                    ),
                   ),
                 ),
                 const Spacer(),
-                if (!showHamburger) ...[
-                  ..._navItems.map((item) => _NavLink(
-                        item: item,
-                        isActive: currentLocation == item.route ||
-                            (item.route != '/' &&
-                                currentLocation.startsWith(item.route)),
-                      )),
+                if (!compact) ...[
+                  for (final item in navItems)
+                    _NavLink(item: item, active: item.isActive(location)),
                   const SizedBox(width: AppSpacing.md),
-                  _JoinButton(),
-                ] else ...[
-                  Semantics(
-                    label: 'Open navigation menu',
-                    child: IconButton(
-                      icon: const Icon(Icons.menu_rounded),
-                      color: AppColors.darkNavy,
-                      iconSize: 28,
-                      onPressed: () => _openDrawer(context),
+                  FilledButton(
+                    onPressed: () => UrlService.open(AppStrings.meetupUrl),
+                    style: FilledButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 22,
+                        vertical: 14,
+                      ),
+                      textStyle: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    child: const Text('Join on Meetup'),
+                  ),
+                ] else
+                  IconButton(
+                    tooltip: 'Open menu',
+                    icon: const Icon(Icons.menu_rounded),
+                    color: AppColors.ink,
+                    iconSize: 28,
+                    onPressed: () => showModalBottomSheet<void>(
+                      context: context,
+                      showDragHandle: true,
+                      backgroundColor: AppColors.white,
+                      builder: (_) => _MobileMenu(location: location),
                     ),
                   ),
-                ],
               ],
             ),
           ),
@@ -110,172 +103,82 @@ class _AppNavBarState extends State<AppNavBar> {
   }
 }
 
-class _NavItem {
-  const _NavItem(this.label, this.route);
-  final String label;
-  final String route;
-}
-
-class _NavLink extends StatefulWidget {
-  const _NavLink({required this.item, required this.isActive});
-  final _NavItem item;
-  final bool isActive;
-
-  @override
-  State<_NavLink> createState() => _NavLinkState();
-}
-
-class _NavLinkState extends State<_NavLink> {
-  bool _hovered = false;
+class _NavLink extends StatelessWidget {
+  const _NavLink({required this.item, required this.active});
+  final NavItem item;
+  final bool active;
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    return MouseRegion(
-      onEnter: (_) => setState(() => _hovered = true),
-      onExit: (_) => setState(() => _hovered = false),
-      cursor: SystemMouseCursors.click,
-      child: GestureDetector(
-        onTap: () => context.go(widget.item.route),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: AppSpacing.sm),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                widget.item.label,
-                style: theme.textTheme.labelLarge?.copyWith(
-                  color: widget.isActive
-                      ? AppColors.flutterBlue
-                      : _hovered
-                          ? AppColors.brightBlue
-                          : AppColors.darkNavy,
-                  fontSize: 14,
-                ),
-              ),
-              const SizedBox(height: 4),
-              AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                height: 2,
-                width: widget.isActive || _hovered ? 24 : 0,
-                decoration: BoxDecoration(
-                  color: AppColors.flutterBlue,
-                  borderRadius: BorderRadius.circular(1),
-                ),
-              ),
-            ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 2),
+      child: TextButton(
+        onPressed: () => context.go(item.route),
+        style: TextButton.styleFrom(
+          foregroundColor: active ? AppColors.action : AppColors.body,
+          backgroundColor: active ? AppColors.tint100 : null,
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          shape: const StadiumBorder(),
+          textStyle: TextStyle(
+            fontSize: 15,
+            fontWeight: active ? FontWeight.w700 : FontWeight.w500,
           ),
         ),
+        child: Text(item.label),
       ),
     );
   }
 }
 
-class _JoinButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () => context.go('/events'),
-      style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-        textStyle: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
-      ),
-      child: const Text('Join the Community'),
-    );
-  }
-}
-
-class _MobileNavDrawer extends StatelessWidget {
-  const _MobileNavDrawer({required this.navItems});
-  final List<_NavItem> navItems;
+class _MobileMenu extends StatelessWidget {
+  const _MobileMenu({required this.location});
+  final String location;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.sizeOf(context).height * 0.85,
-      decoration: const BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
-      ),
-      child: Column(
-        children: [
-          const SizedBox(height: AppSpacing.sm),
-          Container(
-            width: 40,
-            height: 4,
-            decoration: BoxDecoration(
-              color: AppColors.lightGrey,
-              borderRadius: BorderRadius.circular(2),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppSpacing.xl,
-              vertical: AppSpacing.lg,
-            ),
-            child: Row(
-              children: [
-                const FBLogo(height: 32),
-                const Spacer(),
-                Semantics(
-                  label: 'Close navigation menu',
-                  child: IconButton(
-                    icon: const Icon(Icons.close_rounded),
-                    color: AppColors.darkNavy,
-                    onPressed: () => Navigator.of(context).pop(),
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(
+          AppSpacing.lg,
+          0,
+          AppSpacing.lg,
+          AppSpacing.lg,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            for (final item in navItems)
+              ListTile(
+                title: Text(
+                  item.label,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: item.isActive(location)
+                        ? FontWeight.w700
+                        : FontWeight.w500,
+                    color: item.isActive(location)
+                        ? AppColors.action
+                        : AppColors.ink,
                   ),
                 ),
-              ],
-            ),
-          ),
-          const Divider(height: 1),
-          Expanded(
-            child: ListView(
-              padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
-              children: [
-                ...navItems.map((item) => ListTile(
-                      title: Text(
-                        item.label,
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              color: AppColors.darkNavy,
-                            ),
-                      ),
-                      onTap: () {
-                        Navigator.of(context).pop();
-                        context.go(item.route);
-                      },
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: AppSpacing.xl,
-                        vertical: AppSpacing.xs,
-                      ),
-                    )),
-                Padding(
-                  padding: const EdgeInsets.all(AppSpacing.xl),
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                        context.go('/events');
-                      },
-                      child: const Text('Join the Community'),
-                    ),
-                  ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: AppSpacing.xl),
-                  child: Text(
-                    AppStrings.independentNotice,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: AppColors.neutralGrey,
-                        ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ],
+                selected: item.isActive(location),
+                selectedTileColor: AppColors.tint100,
+                onTap: () {
+                  Navigator.of(context).pop();
+                  context.go(item.route);
+                },
+              ),
+            const SizedBox(height: AppSpacing.md),
+            FilledButton(
+              onPressed: () => UrlService.open(AppStrings.meetupUrl),
+              child: const Text('Join on Meetup'),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

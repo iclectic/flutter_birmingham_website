@@ -25,25 +25,21 @@ class PlaceholderImage extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: AppColors.lightGrey,
         borderRadius: borderRadius,
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFFE8EDF2), Color(0xFFD0DBE8)],
+          colors: [AppColors.tint100, AppColors.tint300],
         ),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, color: AppColors.neutralGrey.withAlpha(120), size: 40),
+          Icon(icon, color: AppColors.blue.withAlpha(140), size: 40),
           const SizedBox(height: 8),
           Text(
             label,
-            style: const TextStyle(
-              color: AppColors.neutralGrey,
-              fontSize: 12,
-            ),
+            style: const TextStyle(color: AppColors.blue, fontSize: 12),
             textAlign: TextAlign.center,
           ),
         ],
