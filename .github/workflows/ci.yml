@@ -1,13 +1,22 @@
-name: CI
+name: CI / Deploy
 
 on:
   push:
     branches: [main]
   pull_request:
+  workflow_dispatch:
 
 concurrency:
   group: ci-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+env:
+  FLUTTER_VERSION: 3.47.9
+  DEPLOY_BRANCH: hostinger-deploy
+  SITE_URL: https://www.flutterbirmingham.co.uk
 
 jobs:
   build:
@@ -16,6 +25,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: subosito/flutter-action@v2
         with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: stable
           cache: true
       - run: flutter pub get
@@ -23,8 +33,66 @@ jobs:
       - run: flutter analyze
       - run: flutter test
       - run: flutter build web --release --wasm
+      - name: Stamp build revision
+        run: sed -i "s|</head>|  <meta name=\"build-revision\" content=\"${GITHUB_SHA}\">\n</head>|" build/web/index.html
+      - name: Verify build output
+        run: |
+          rm -f build/web/.last_build_id
+          chmod -R u=rwX,go=rX build/web
+          for f in index.html .htaccess flutter_bootstrap.js main.dart.js main.dart.wasm manifest.json; do
+            test -s "build/web/$f" || { echo "::error::build/web/$f is missing"; exit 1; }
+          done
+          grep -q "build-revision\" content=\"${GITHUB_SHA}\"" build/web/index.html
       - uses: actions/upload-artifact@v4
         with:
           name: web-build
           path: build/web
+          include-hidden-files: true
           retention-days: 7
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: deploy-hostinger
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: web-build
+          path: ${{ runner.temp }}/web
+      - name: Publish build to ${{ env.DEPLOY_BRANCH }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git ls-remote --exit-code --heads origin "$DEPLOY_BRANCH" >/dev/null; then
+            git fetch --depth 1 origin "$DEPLOY_BRANCH"
+            git worktree add -B "$DEPLOY_BRANCH" deploy FETCH_HEAD
+          else
+            git worktree add --orphan -b "$DEPLOY_BRANCH" deploy
+          fi
+          find deploy -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp -a "$RUNNER_TEMP/web/." deploy/
+          chmod -R u=rwX,go=rX deploy
+          cd deploy
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to deploy."
+            exit 0
+          fi
+          git commit -q -m "Deploy ${GITHUB_SHA::7} from main" -m "Source: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/commit/${GITHUB_SHA}"
+          git push origin "HEAD:$DEPLOY_BRANCH"
+          echo "Published ${GITHUB_SHA::7} to $DEPLOY_BRANCH" >> "$GITHUB_STEP_SUMMARY"
+
+  smoke-test:
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wait for Hostinger to serve this revision, then check routes
+        run: scripts/smoke_test.sh "$SITE_URL" "$GITHUB_SHA"

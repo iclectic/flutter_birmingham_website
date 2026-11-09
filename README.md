@@ -77,19 +77,19 @@ URLs, emails and copy live in `lib/core/constants/app_strings.dart`.
 ## Before launch
 
 - Replace `AppStrings.speakerFormUrl` (currently a placeholder Google Form).
-- Confirm `hello@` / `conduct@flutterbirmingham.dev` exist, or change them in `app_strings.dart`.
+- Confirm `hello@` / `conduct@flutterbirmingham.dev` exist (the site is on `flutterbirmingham.co.uk`), or change them in `app_strings.dart`.
 - Confirm the Meetup, LinkedIn and YouTube URLs in `app_strings.dart`.
 - Replace the placeholder launch event in `events.dart` with real date and venue.
-- `web/index.html` uses `https://flutterbirmingham.dev/` for canonical and OG URLs. Update it if the domain differs.
 
-## Deployment (Firebase Hosting)
+## Deployment (Hostinger)
 
-```bash
-flutter build web --release --wasm
-firebase deploy --only hosting
-```
+Production is https://www.flutterbirmingham.co.uk, hosted on Hostinger.
 
-`firebase.json` already contains the SPA rewrite needed for path URLs. Other static hosts need a catch-all rewrite to `index.html`.
+On every push to `main`, GitHub Actions (`.github/workflows/ci.yml`) runs format, analyze and tests. It then builds `build/web` and publishes only that output to the `hostinger-deploy` branch. Hostinger's Git integration deploys that branch to `public_html`. `web/.htaccess` ships with the build and handles path URLs, wasm MIME types, caching and the `www` redirect.
+
+Never point Hostinger at `main`: it contains source code, not a website.
+
+Setup, smoke tests, troubleshooting and rollback: [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
 
 ## Trademark notice
 
