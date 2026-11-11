@@ -9,22 +9,26 @@ const List<TeamMember> team = [
     role: 'Organiser',
     teamRole: TeamRole.organiser,
     bio:
-        'Founder of Flutter Birmingham. Brings the Midlands Flutter and Dart '
-        'community together to learn, build and share.',
+        'Organiser of Flutter Birmingham. Brings the Midlands Flutter and '
+        'Dart community together to learn, build and share.',
     photoAsset: 'assets/images/team/ibim_braide.jpg',
+    linkedInUrl: 'https://www.linkedin.com/in/ibim-braide/',
     websiteUrl: 'https://ibimbraide.com/',
     gitHubUrl: 'https://github.com/iclectic',
   ),
   TeamMember(
-    id: 'co-organiser-1',
-    name: 'Co-organiser',
+    id: 'franklin-oladipo',
+    name: 'Franklin Oladipo',
     role: 'Co-organiser',
     teamRole: TeamRole.coOrganiser,
-    bio: 'Profile coming soon.',
-    isPlaceholder: true,
+    bio:
+        'Co-organiser of Flutter Birmingham. Helps run the meetups and '
+        'welcome new members to the community.',
+    photoAsset: 'assets/images/team/franklin_oladipo.jpg',
+    linkedInUrl: 'https://www.linkedin.com/in/franklin-oladipo/',
   ),
   TeamMember(
-    id: 'co-organiser-2',
+    id: 'co-organiser',
     name: 'Co-organiser',
     role: 'Co-organiser',
     teamRole: TeamRole.coOrganiser,
