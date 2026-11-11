@@ -20,9 +20,7 @@ const List<TeamMember> team = [
     name: 'Franklin Oladipo',
     role: 'Co-organiser',
     teamRole: TeamRole.coOrganiser,
-    bio:
-        'Co-organiser of Flutter Birmingham. Helps run the meetups and '
-        'welcome new members to the community.',
+    bio: 'Team Lead, Mobile Developer · BT Group',
     photoAsset: 'assets/images/team/franklin_oladipo.jpg',
     linkedInUrl: 'https://www.linkedin.com/in/franklin-oladipo/',
   ),
@@ -31,9 +29,7 @@ const List<TeamMember> team = [
     name: 'Oluwabukunmi Rufus',
     role: 'Co-organiser',
     teamRole: TeamRole.coOrganiser,
-    bio:
-        'Co-organiser of Flutter Birmingham. Helps run the meetups and '
-        'grow the local Flutter community.',
+    bio: 'Software Engineer | Power Platform Developer',
     photoAsset: 'assets/images/team/oluwabukunmi_rufus.jpg',
     linkedInUrl: 'https://www.linkedin.com/in/oluwabukunmi-rufus-761015256/',
   ),
