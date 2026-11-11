@@ -55,9 +55,13 @@ for path in /flutter_bootstrap.js /main.dart.js /manifest.json /favicon.png \
   [[ "$code" == 200 ]] && pass "$path" || fail "$path (HTTP $code)"
 done
 
-wasm_type="$(curl -sS -o /dev/null -I -w '%{content_type}' -m 30 "$BASE_URL/main.dart.wasm" || true)"
-[[ "$wasm_type" == application/wasm* ]] && pass "/main.dart.wasm is application/wasm" ||
-  fail "/main.dart.wasm content-type is '$wasm_type'"
+# Chrome runs the wasm build and rejects these files if served as text/plain.
+for pair in "/main.dart.wasm application/wasm" "/main.dart.mjs text/javascript" \
+  "/canvaskit/skwasm.wasm application/wasm"; do
+  read -r path want <<<"$pair"
+  type="$(curl -sS -o /dev/null -I -w '%{content_type}' -m 30 "$BASE_URL$path" || true)"
+  [[ "$type" == "$want"* ]] && pass "$path is $want" || fail "$path content-type is '$type'"
+done
 
 echo "Source files must not be public (expect 404/403):"
 for path in /pubspec.yaml /README.md /lib/main.dart /web/index.html; do

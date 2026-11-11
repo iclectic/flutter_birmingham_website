@@ -96,6 +96,7 @@ The `--wasm` build also emits `main.dart.js`. Browsers without WasmGC, such as o
 | --- | --- |
 | 403 on `/` | No `index.html` in `public_html`. The Git deployment points at the wrong branch or directory, or the first deploy never ran. |
 | `/pubspec.yaml` or `/README.md` returns 200 | Hostinger is deploying `main`. Re-point it to `hostinger-deploy`. |
+| Blank page / stuck on loading screen in Chrome only (Safari and Firefox work) | `.htaccess` is missing, so `main.dart.mjs` and `*.wasm` are served as `text/plain`. Chrome runs the wasm build and refuses the module (console: "Strict MIME type checking is enforced for module scripts"); other browsers fall back to `main.dart.js`. |
 | `/events` returns 404 on refresh | `.htaccess` is missing from `public_html`. Check the `hostinger-deploy` branch contains it. |
 | Smoke-test job times out | The webhook isn't configured or failed. Check hPanel → GIT → deployment log, and GitHub → Settings → Webhooks → Recent deliveries. Click **Deploy** in hPanel to pull manually. |
 | Old version still showing | Browser or CDN cache. Check `curl -s https://www.flutterbirmingham.co.uk/ \| grep build-revision`. If Hostinger CDN is on, purge it in hPanel. |
