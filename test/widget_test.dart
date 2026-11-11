@@ -68,15 +68,16 @@ void main() {
   });
 
   group('Team', () {
-    test('has an organiser, Franklin and one open co-organiser slot', () {
+    test('has one organiser and two co-organisers', () {
       expect(team, hasLength(3));
       expect(team.first.name, 'Ibim Braide');
       expect(team.first.teamRole, TeamRole.organiser);
       expect(team[1].name, 'Franklin Oladipo');
-      expect(team.where((m) => m.isPlaceholder), hasLength(1));
+      expect(team[2].name, 'Oluwabukunmi Rufus');
+      expect(team.where((m) => m.isPlaceholder), isEmpty);
     });
 
-    testWidgets('TeamPage shows organiser and placeholders', (tester) async {
+    testWidgets('TeamPage shows the organising team', (tester) async {
       tester.view.physicalSize = const Size(1400, 2400);
       tester.view.devicePixelRatio = 1;
       addTearDown(tester.view.reset);
@@ -84,7 +85,8 @@ void main() {
       await tester.pump(const Duration(seconds: 1));
       expect(find.text('Ibim Braide'), findsOneWidget);
       expect(find.text('Organiser'), findsOneWidget);
-      expect(find.text('Photo coming soon'), findsOneWidget);
+      expect(find.text('Oluwabukunmi Rufus'), findsOneWidget);
+      expect(find.text('Photo coming soon'), findsNothing);
     });
   });
 }

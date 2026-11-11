@@ -1,7 +1,6 @@
 import '../models/team_member.dart';
 
 /// The Flutter Birmingham organising team.
-/// Co-organiser slots render as placeholders until real profiles are added.
 const List<TeamMember> team = [
   TeamMember(
     id: 'ibim-braide',
@@ -28,11 +27,14 @@ const List<TeamMember> team = [
     linkedInUrl: 'https://www.linkedin.com/in/franklin-oladipo/',
   ),
   TeamMember(
-    id: 'co-organiser',
-    name: 'Co-organiser',
+    id: 'oluwabukunmi-rufus',
+    name: 'Oluwabukunmi Rufus',
     role: 'Co-organiser',
     teamRole: TeamRole.coOrganiser,
-    bio: 'Profile coming soon.',
-    isPlaceholder: true,
+    bio:
+        'Co-organiser of Flutter Birmingham. Helps run the meetups and '
+        'grow the local Flutter community.',
+    photoAsset: 'assets/images/team/oluwabukunmi_rufus.jpg',
+    linkedInUrl: 'https://www.linkedin.com/in/oluwabukunmi-rufus-761015256/',
   ),
 ];
