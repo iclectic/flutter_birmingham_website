@@ -17,17 +17,18 @@ abstract final class AppStrings {
     '#Birmingham',
   ];
 
-  // TODO(organisers): replace placeholder links before launch.
   static const String meetupUrl = 'https://www.meetup.com/flutter-birmingham/';
   static const String linkedInUrl =
-      'https://www.linkedin.com/company/flutter-birmingham/';
-  static const String youTubeUrl =
-      'https://www.youtube.com/@flutter-birmingham';
+      'https://www.linkedin.com/company/146899611/';
+  static const String youTubeUrl = 'https://www.youtube.com/@Flutterbrum';
+  static const String blueskyUrl =
+      'https://bsky.app/profile/flutterbirmingham.bsky.social';
   static const String gitHubUrl =
       'https://github.com/iclectic/flutter_birmingham_website';
-  static const String contactEmail = 'hello@flutterbirmingham.dev';
-  static const String conductEmail = 'conduct@flutterbirmingham.dev';
-  static const String speakerFormUrl = 'https://forms.gle/your-speaker-form-id';
+  static const String contactEmail = 'flutterbrum@gmail.com';
+  static const String conductEmail = contactEmail;
+  static const String speakerFormUrl =
+      'https://docs.google.com/forms/d/e/1FAIpQLSe4cQX-DFlKlkfnHEaUJeAQFeyw9eUJwqUfRZqhEmno9o-FKA/viewform';
 
   static const String independentNotice =
       'Flutter Birmingham is an independent community group. Flutter and the '

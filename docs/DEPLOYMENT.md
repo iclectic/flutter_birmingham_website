@@ -84,7 +84,8 @@ The `--wasm` build also emits `main.dart.js`. Browsers without WasmGC, such as o
 
 `web/.htaccess` is copied into `build/web` by Flutter and ships with every deploy. It:
 
-- Rewrites extensionless paths (`/events`, `/team`, `/code-of-conduct`, `/events/<id>`) to `index.html`. Real files and missing files with extensions are not rewritten, so a missing file gets a genuine 404.
+- Redirects `/events` and `/events/*` (302) to the Meetup group.
+- Rewrites extensionless paths (`/team`, `/code-of-conduct`) to `index.html`. Real files and missing files with extensions are not rewritten, so a missing file gets a genuine 404.
 - Sets `application/wasm` and `text/javascript` MIME types.
 - Sets `no-cache` on html/js/mjs/wasm/json, because Flutter's file names are not content-hashed, and a 7-day cache on images and fonts.
 - Sends COOP `same-origin` and COEP `credentialless` so the wasm renderer can run multi-threaded, plus `nosniff` and a referrer policy.
@@ -97,7 +98,7 @@ The `--wasm` build also emits `main.dart.js`. Browsers without WasmGC, such as o
 | 403 on `/` | No `index.html` in `public_html`. The Git deployment points at the wrong branch or directory, or the first deploy never ran. |
 | `/pubspec.yaml` or `/README.md` returns 200 | Hostinger is deploying `main`. Re-point it to `hostinger-deploy`. |
 | Blank page / stuck on loading screen in Chrome only (Safari and Firefox work) | `.htaccess` is missing, so `main.dart.mjs` and `*.wasm` are served as `text/plain`. Chrome runs the wasm build and refuses the module (console: "Strict MIME type checking is enforced for module scripts"); other browsers fall back to `main.dart.js`. |
-| `/events` returns 404 on refresh | `.htaccess` is missing from `public_html`. Check the `hostinger-deploy` branch contains it. |
+| `/team` returns 404 on refresh | `.htaccess` is missing from `public_html`. Check the `hostinger-deploy` branch contains it. |
 | Smoke-test job times out | The webhook isn't configured or failed. Check hPanel → GIT → deployment log, and GitHub → Settings → Webhooks → Recent deliveries. Click **Deploy** in hPanel to pull manually. |
 | Old version still showing | Browser or CDN cache. Check `curl -s https://www.flutterbirmingham.co.uk/ \| grep build-revision`. If Hostinger CDN is on, purge it in hPanel. |
 | Deploy job fails on `git push` | Actions lacks write permission (see GitHub settings) or `hostinger-deploy` is protected. |

@@ -21,10 +21,11 @@ const _columns = <String, List<_FooterLink>>{
     _FooterLink('Meetup', url: AppStrings.meetupUrl),
     _FooterLink('LinkedIn', url: AppStrings.linkedInUrl),
     _FooterLink('YouTube', url: AppStrings.youTubeUrl),
+    _FooterLink('Bluesky', url: AppStrings.blueskyUrl),
     _FooterLink('GitHub', url: AppStrings.gitHubUrl),
   ],
   'Get involved': [
-    _FooterLink('Upcoming events', route: '/events'),
+    _FooterLink('Upcoming events', url: AppStrings.meetupUrl),
     _FooterLink('Give a talk', url: AppStrings.speakerFormUrl),
     _FooterLink('Meet the team', route: '/team'),
     _FooterLink('Code of Conduct', route: '/code-of-conduct'),
