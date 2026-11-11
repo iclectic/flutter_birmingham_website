@@ -21,6 +21,7 @@ abstract final class AppStrings {
   static const String linkedInUrl =
       'https://www.linkedin.com/company/146899611/';
   static const String youTubeUrl = 'https://www.youtube.com/@Flutterbrum';
+  static const String xUrl = 'https://x.com/flutterbrum';
   static const String blueskyUrl =
       'https://bsky.app/profile/flutterbirmingham.bsky.social';
   static const String gitHubUrl =
