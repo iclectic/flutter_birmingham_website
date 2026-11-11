@@ -5,8 +5,6 @@ import '../core/constants/app_colors.dart';
 import '../core/widgets/app_shell.dart';
 import '../core/widgets/not_found_page.dart';
 import '../features/code_of_conduct/code_of_conduct_page.dart';
-import '../features/events/event_detail_page.dart';
-import '../features/events/events_page.dart';
 import '../features/home/home_page.dart';
 import '../features/team/team_page.dart';
 
@@ -22,13 +20,18 @@ Page<void> _page(String title, Widget child) => NoTransitionPage(
   ),
 );
 
-/// Older URLs that now live as sections on the home page.
-const _legacyRoutes = {'/about', '/gallery', '/contact'};
+/// Older URLs. Events now live on Meetup (the server redirects `/events`
+/// there); the rest are sections on the home page.
+const _legacyRoutes = {'/about', '/gallery', '/contact', '/events'};
 
 final appRouter = GoRouter(
   initialLocation: '/',
-  redirect: (context, state) =>
-      _legacyRoutes.contains(state.uri.path) ? '/' : null,
+  redirect: (context, state) {
+    final path = state.uri.path;
+    return _legacyRoutes.contains(path) || path.startsWith('/events/')
+        ? '/'
+        : null;
+  },
   errorPageBuilder: (context, state) =>
       _page('Page not found', const NotFoundPage()),
   routes: [
@@ -39,19 +42,6 @@ final appRouter = GoRouter(
         GoRoute(
           path: '/',
           pageBuilder: (context, state) => _page('', const HomePage()),
-        ),
-        GoRoute(
-          path: '/events',
-          pageBuilder: (context, state) => _page('Events', const EventsPage()),
-          routes: [
-            GoRoute(
-              path: ':eventId',
-              pageBuilder: (context, state) => _page(
-                'Event',
-                EventDetailPage(eventId: state.pathParameters['eventId']!),
-              ),
-            ),
-          ],
         ),
         GoRoute(
           path: '/team',

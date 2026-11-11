@@ -20,9 +20,10 @@ abstract final class AppStrings {
   // TODO(organisers): replace placeholder links before launch.
   static const String meetupUrl = 'https://www.meetup.com/flutter-birmingham/';
   static const String linkedInUrl =
-      'https://www.linkedin.com/company/flutter-birmingham/';
-  static const String youTubeUrl =
-      'https://www.youtube.com/@flutter-birmingham';
+      'https://www.linkedin.com/company/146899611/';
+  static const String youTubeUrl = 'https://www.youtube.com/@Flutterbrum';
+  static const String blueskyUrl =
+      'https://bsky.app/profile/flutterbirmingham.bsky.social';
   static const String gitHubUrl =
       'https://github.com/iclectic/flutter_birmingham_website';
   static const String contactEmail = 'hello@flutterbirmingham.dev';

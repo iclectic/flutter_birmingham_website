@@ -35,7 +35,7 @@ if [[ -n "$EXPECTED_REVISION" ]]; then
 fi
 
 echo "App routes (expect 200 + Flutter index.html):"
-for path in / /events /team /code-of-conduct /events/launch-meetup; do
+for path in / /team /code-of-conduct; do
   body="$(curl -sS -m 30 -w '\n%{http_code}' "$BASE_URL$path" || printf '\n000')"
   code="${body##*$'\n'}"
   if [[ "$code" == 200 ]] && grep -q 'flutter_bootstrap.js' <<<"$body"; then
@@ -44,6 +44,10 @@ for path in / /events /team /code-of-conduct /events/launch-meetup; do
     fail "$path (HTTP $code)"
   fi
 done
+
+events="$(curl -sS -o /dev/null -w '%{http_code} %{redirect_url}' -m 30 "$BASE_URL/events" || true)"
+[[ "$events" == 30[12]" https://www.meetup.com/"* ]] && pass "/events redirects to Meetup" ||
+  fail "/events -> '$events'"
 
 echo "Build assets (expect 200):"
 for path in /flutter_bootstrap.js /main.dart.js /manifest.json /favicon.png \

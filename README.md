@@ -2,16 +2,15 @@
 
 The community website for **Flutter Birmingham**, the free, independent Flutter & Dart meetup for Birmingham and the West Midlands. Built with Flutter Web.
 
-The site has four pages:
+The site has three pages. Events are run on [Meetup](https://www.meetup.com/flutter-birmingham/); every events link points there.
 
 | Route | Page |
 |---|---|
-| `/` | Home: hero, next meetup, what we do, get involved, Flutter resources |
-| `/events`, `/events/:id` | Upcoming and past events, plus a page for each event |
+| `/` | Home: hero, events (links to Meetup), what we do, get involved, Flutter resources |
 | `/team` | Organiser and co-organisers |
 | `/code-of-conduct` | Code of Conduct |
 
-Old routes (`/about`, `/gallery`, `/contact`) redirect to `/`.
+Old routes (`/about`, `/gallery`, `/contact`) redirect to `/`. `/events` redirects to the Meetup group (server-side, in `web/.htaccess`).
 
 ## Tech stack
 
@@ -34,9 +33,9 @@ lib/
   app/            app widget, router, theme, providers
   core/           constants, responsive helpers, shared widgets (nav, footer, logo…)
   data/
-    content/      events.dart and team.dart: the site's editable content
-    models/       CommunityEvent, TeamMember
-  features/       home, events, team, code_of_conduct
+    content/      team.dart: the site's editable content
+    models/       TeamMember
+  features/       home, team, code_of_conduct
   services/       url_service.dart
 assets/
   fonts/          Google Sans
@@ -66,7 +65,7 @@ GitHub Actions (`.github/workflows/ci.yml`) runs format, analyze, test and a was
 ## Updating content
 
 ### Events
-Edit `lib/data/content/events.dart`. Add one `CommunityEvent` per meetup. The next upcoming event appears on the home page automatically, and events move to "Past events" once they end. Leave `imageAsset` empty to use the branded logo tile, or point it at an image in `assets/`. Add `videoUrl`/`slidesUrl` after the event to show recordings.
+Create and manage events on Meetup. The site links to `AppStrings.meetupUrl` and needs no change per event.
 
 ### Team
 Edit `lib/data/content/team.dart`. Put photos in `assets/images/team/`. To fill a co-organiser slot, replace the placeholder entry with their name, bio and `photoAsset`, and remove `isPlaceholder: true`.
@@ -78,8 +77,6 @@ URLs, emails and copy live in `lib/core/constants/app_strings.dart`.
 
 - Replace `AppStrings.speakerFormUrl` (currently a placeholder Google Form).
 - Confirm `hello@` / `conduct@flutterbirmingham.dev` exist (the site is on `flutterbirmingham.co.uk`), or change them in `app_strings.dart`.
-- Confirm the Meetup, LinkedIn and YouTube URLs in `app_strings.dart`.
-- Replace the placeholder launch event in `events.dart` with real date and venue.
 
 ## Deployment (Hostinger)
 

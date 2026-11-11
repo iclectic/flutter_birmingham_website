@@ -18,7 +18,10 @@ DirectoryIndex index.html
   RewriteCond %{HTTP_HOST} ^flutterbirmingham\.co\.uk$ [NC]
   RewriteRule ^ https://www.flutterbirmingham.co.uk%{REQUEST_URI} [R=301,L]
 
-  # SPA fallback for app routes (/events, /team, ...). Paths with a file
+  # Events are run on Meetup.
+  RewriteRule ^events(/.*)?$ https://www.meetup.com/flutter-birmingham/ [R=302,L]
+
+  # SPA fallback for app routes (/team, /code-of-conduct). Paths with a file
   # extension are left alone so missing files return a real 404.
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d

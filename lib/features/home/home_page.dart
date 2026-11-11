@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../app/providers.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_spacing.dart';
 import '../../core/constants/app_strings.dart';
@@ -12,8 +10,6 @@ import '../../core/widgets/fade_in_widget.dart';
 import '../../core/widgets/fb_logo.dart';
 import '../../core/widgets/section_heading.dart';
 import '../../services/url_service.dart';
-import '../events/events_page.dart';
-import '../events/widgets/event_card.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -23,7 +19,7 @@ class HomePage extends StatelessWidget {
     return const Column(
       children: [
         _Hero(),
-        _NextEvent(),
+        _Events(),
         _WhatWeDo(),
         _GetInvolved(),
         _Resources(),
@@ -119,7 +115,7 @@ class _Hero extends StatelessWidget {
               label: const Text('Join on Meetup'),
             ),
             OutlinedButton(
-              onPressed: () => context.go('/events'),
+              onPressed: () => UrlService.open(AppStrings.meetupUrl),
               child: const Text('See upcoming events'),
             ),
           ],
@@ -224,44 +220,29 @@ class _HeroArt extends StatelessWidget {
   }
 }
 
-class _NextEvent extends ConsumerWidget {
-  const _NextEvent();
+class _Events extends StatelessWidget {
+  const _Events();
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final event = ref.watch(upcomingEventProvider);
+  Widget build(BuildContext context) {
     return PageSection(
       child: ContentContainer(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                const Expanded(
-                  child: SectionHeading(
-                    eyebrow: 'Events',
-                    title: 'Join us at the next meetup',
-                  ),
-                ),
-                if (!Breakpoints.isMobile(context))
-                  TextButton.icon(
-                    onPressed: () => context.go('/events'),
-                    icon: const Text('All events'),
-                    label: const Icon(Icons.arrow_forward_rounded, size: 18),
-                  ),
-              ],
+            const SectionHeading(
+              eyebrow: 'Events',
+              title: 'Join us at the next meetup',
+              subtitle:
+                  'Every meetup is announced on Meetup. RSVP there for the '
+                  'date, venue and speakers, and to save your spot.',
             ),
             const SizedBox(height: AppSpacing.xl),
-            if (event != null)
-              FadeInWidget(child: FeaturedEventCard(event: event))
-            else
-              const EmptyState(
-                icon: Icons.event_outlined,
-                title: 'The next meetup is being planned',
-                message:
-                    'Join us on Meetup to hear first when it\'s announced.',
-              ),
+            FilledButton.icon(
+              onPressed: () => UrlService.open(AppStrings.meetupUrl),
+              icon: const Icon(Icons.event_outlined, size: 20),
+              label: const Text('See upcoming events on Meetup'),
+            ),
           ],
         ),
       ),

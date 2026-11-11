@@ -9,18 +9,31 @@ import '../../services/url_service.dart';
 import 'fb_logo.dart';
 
 class NavItem {
-  const NavItem(this.label, this.route);
+  const NavItem(this.label, this.route) : url = null;
+  const NavItem.external(this.label, String this.url) : route = '';
   final String label;
   final String route;
+  final String? url;
 
-  bool isActive(String location) => route == '/'
-      ? location == '/'
-      : location == route || location.startsWith('$route/');
+  bool isActive(String location) {
+    if (url != null) return false;
+    return route == '/'
+        ? location == '/'
+        : location == route || location.startsWith('$route/');
+  }
+
+  void open(BuildContext context) {
+    if (url != null) {
+      UrlService.open(url!);
+    } else {
+      context.go(route);
+    }
+  }
 }
 
 const navItems = [
   NavItem('Home', '/'),
-  NavItem('Events', '/events'),
+  NavItem.external('Events', AppStrings.meetupUrl),
   NavItem('Team', '/team'),
   NavItem('Code of Conduct', '/code-of-conduct'),
 ];
@@ -113,7 +126,7 @@ class _NavLink extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 2),
       child: TextButton(
-        onPressed: () => context.go(item.route),
+        onPressed: () => item.open(context),
         style: TextButton.styleFrom(
           foregroundColor: active ? AppColors.action : AppColors.body,
           backgroundColor: active ? AppColors.tint100 : null,
@@ -169,7 +182,7 @@ class _MobileMenu extends StatelessWidget {
                 selectedTileColor: AppColors.tint100,
                 onTap: () {
                   Navigator.of(context).pop();
-                  context.go(item.route);
+                  item.open(context);
                 },
               ),
             const SizedBox(height: AppSpacing.md),
