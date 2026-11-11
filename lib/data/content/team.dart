@@ -7,9 +7,7 @@ const List<TeamMember> team = [
     name: 'Ibim Braide',
     role: 'Organiser',
     teamRole: TeamRole.organiser,
-    bio:
-        'Organiser of Flutter Birmingham. Brings the Midlands Flutter and '
-        'Dart community together to learn, build and share.',
+    bio: 'Software Engineer | Technical Writer',
     photoAsset: 'assets/images/team/ibim_braide.jpg',
     linkedInUrl: 'https://www.linkedin.com/in/ibim-braide/',
     websiteUrl: 'https://ibimbraide.com/',
