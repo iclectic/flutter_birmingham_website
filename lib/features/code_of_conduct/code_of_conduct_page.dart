@@ -34,7 +34,8 @@ class CodeOfConductPage extends StatelessWidget {
                 eyebrow: 'COMMUNITY',
                 title: 'Code of Conduct',
                 subtitle:
-                    'Flutter Birmingham is dedicated to providing a safe, inclusive, and respectful experience for everyone.',
+                    'We want everyone to feel safe and welcome at our events. This '
+                    'is what we expect from everyone who comes along.',
                 light: true,
               ),
             ),
@@ -70,9 +71,20 @@ class CodeOfConductPage extends StatelessWidget {
 class _CoCContent extends StatelessWidget {
   const _CoCContent();
 
+  static const _cc0Url = 'https://creativecommons.org/publicdomain/zero/1.0/';
+  static const _gdgUrl =
+      'https://support.google.com/developergroups/answer/3340512?hl=en';
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final bodyStyle = theme.textTheme.bodyLarge?.copyWith(height: 1.8);
+    final linkStyle = bodyStyle?.copyWith(
+      color: AppColors.flutterBlue,
+      fontWeight: FontWeight.w600,
+      decoration: TextDecoration.underline,
+      decorationColor: AppColors.flutterBlue,
+    );
 
     Widget h2(String text) => Padding(
       padding: const EdgeInsets.only(top: AppSpacing.xl, bottom: AppSpacing.sm),
@@ -86,100 +98,181 @@ class _CoCContent extends StatelessWidget {
     );
 
     Widget body(String text) => Padding(
-      padding: const EdgeInsets.only(bottom: AppSpacing.sm),
-      child: Text(
-        text,
-        style: theme.textTheme.bodyLarge?.copyWith(height: 1.8),
-      ),
+      padding: const EdgeInsets.only(bottom: AppSpacing.md),
+      child: Text(text, style: bodyStyle),
     );
 
-    Widget bullet(String text) => Padding(
+    Widget numbered(int n, String lead, String text) => Padding(
       padding: const EdgeInsets.only(
         left: AppSpacing.md,
-        bottom: AppSpacing.xs,
+        bottom: AppSpacing.md,
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Padding(
-            padding: EdgeInsets.only(top: 8),
-            child: CircleAvatar(
-              radius: 3,
-              backgroundColor: AppColors.flutterBlue,
+          SizedBox(
+            width: 28,
+            child: Text(
+              '$n.',
+              style: bodyStyle?.copyWith(
+                color: AppColors.flutterBlue,
+                fontWeight: FontWeight.w700,
+              ),
             ),
           ),
-          const SizedBox(width: AppSpacing.sm),
           Expanded(
-            child: Text(
-              text,
-              style: theme.textTheme.bodyLarge?.copyWith(height: 1.7),
+            child: Text.rich(
+              TextSpan(
+                children: [
+                  TextSpan(
+                    text: '$lead ',
+                    style: const TextStyle(
+                      color: AppColors.darkNavy,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  TextSpan(text: text),
+                ],
+              ),
+              style: bodyStyle,
             ),
           ),
         ],
       ),
     );
 
+    Widget link(String label, String url) => InkWell(
+      onTap: () => UrlService.open(url),
+      child: Text(label, style: linkStyle),
+    );
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        h2('Our Community Commitment'),
         body(
-          'Flutter Birmingham is committed to providing a welcoming, safe, and inclusive '
-          'experience for all attendees, speakers, sponsors, organisers, and volunteers, '
-          'regardless of gender, gender identity and expression, sexual orientation, disability, '
-          'physical appearance, body size, age, race, ethnicity, nationality, religion, '
-          'political views, level of experience, or any other personal characteristics.',
+          'Flutter Birmingham is part of the Flutter Meetup Network and follows '
+          'its Event Code of Conduct & Anti-Harassment Policy, set out in full '
+          'below.',
+        ),
+        h2('Event Code of Conduct & Anti-Harassment Policy'),
+        body(
+          'The Flutter Meetup Network is dedicated to providing a harassment-free '
+          'and inclusive event experience for everyone regardless of gender '
+          'identity and expression, sexual orientation, disabilities, '
+          'neurodiversity, physical appearance, body size, ethnicity, '
+          'nationality, race, age, religion, or other protected category. We do '
+          'not tolerate harassment of event participants in any form. We take '
+          'violations of our policy seriously and will respond appropriately.',
         ),
         body(
-          'We do not tolerate harassment, discrimination, or exclusionary behaviour in any form. '
-          'This Code of Conduct applies to all Flutter Birmingham spaces, including in-person '
-          'events, online platforms, social media, and any other community communications.',
+          'All participants of Flutter Meetup Network events must abide by the '
+          'following policy:',
         ),
-        h2('Expected Behaviour'),
-        body('We ask all community members to:'),
-        bullet('Be kind, respectful, and considerate towards others.'),
-        bullet('Use welcoming and inclusive language.'),
-        bullet('Be supportive of people at all experience levels.'),
-        bullet('Accept constructive feedback graciously.'),
-        bullet('Focus on what is best for the community as a whole.'),
-        bullet('Show empathy and patience towards other community members.'),
-        bullet('Respect differing viewpoints and experiences.'),
-        bullet(
-          'Refrain from sharing others\' personal information without consent.',
+        numbered(
+          1,
+          'Be excellent to each other.',
+          'We want the event to be an excellent experience for everyone '
+              'regardless of gender identity and expression, sexual '
+              'orientation, disabilities, neurodiversity, physical appearance, '
+              'body size, ethnicity, nationality, race, age, religion, or other '
+              'protected category. Treat everyone with respect. Participate '
+              'while acknowledging that everyone deserves to be here, and each '
+              'of us has the right to enjoy our experience without fear of '
+              'harassment, discrimination, or condescension, whether blatant or '
+              "via micro-aggressions. Jokes shouldn't demean others. Consider "
+              'what you are saying and how it would feel if it were said to or '
+              'about you.',
         ),
-        h2('Unacceptable Behaviour'),
+        numbered(
+          2,
+          'Speak up if you see or hear something.',
+          'Harassment is not tolerated, and you are empowered to politely '
+              'engage when you or others are disrespected. The person making '
+              'you feel uncomfortable may not be aware of what they are doing, '
+              'and politely bringing their behaviour to their attention is '
+              'encouraged. If a participant engages in harassing or '
+              'uncomfortable behaviour, the event organisers may take any action '
+              'they deem appropriate, including warning or expelling the '
+              'offender from the event with no refund. If you are being '
+              'harassed or feel uncomfortable, notice that someone else is being '
+              'harassed, or have any other concerns, please contact a member of '
+              'the event staff immediately.',
+        ),
+        numbered(
+          3,
+          'Harassment is not tolerated.',
+          'Harassment includes, but is not limited to: verbal language that '
+              'reinforces social structures of domination related to gender '
+              'identity and expression, sexual orientation, disabilities, '
+              'neurodiversity, physical appearance, body size, ethnicity, '
+              'nationality, race, age, religion, or other protected category; '
+              'sexual imagery in public spaces; deliberate intimidation; '
+              'stalking; following; harassing photography or recording; '
+              'sustained disruption of talks or other events; offensive verbal '
+              'language; inappropriate physical contact; and unwelcome sexual '
+              'attention. Participants asked to stop any harassing behaviour are '
+              'expected to comply immediately.',
+        ),
+        numbered(
+          4,
+          'Practise saying "Yes and" to each other.',
+          "It's a theatre improv technique to build on each other's ideas. We "
+              'all benefit when we create together.',
+        ),
         body(
-          'The following behaviours are considered unacceptable within our community:',
+          'This policy extends to talks, forums, workshops, codelabs, social '
+          'media, parties, hallway conversations, all attendees, partners, '
+          'sponsors, volunteers, event staff, etc. You catch our drift. We '
+          'reserve the right to refuse admittance to, or remove any person from, '
+          'any Flutter Meetup Network hosted event (including future Flutter '
+          'Meetup Network events) at any time in its sole discretion. This '
+          'includes, but is not limited to, attendees behaving in a disorderly '
+          'manner or failing to comply with this policy, and the terms and '
+          'conditions herein. If a participant engages in harassing or '
+          'uncomfortable behaviour, the event organisers may take any action '
+          'they deem appropriate, including warning or expelling the offender '
+          'from the event with no refund.',
         ),
-        bullet(
-          'Harassment of any kind, including offensive comments, deliberate intimidation, '
-          'stalking, following, unwanted photography or recording, sustained disruption, '
-          'inappropriate physical contact, and unwelcome sexual attention.',
-        ),
-        bullet(
-          'Discriminatory jokes, language, or imagery related to any personal characteristic.',
-        ),
-        bullet('Threatening or violent language directed at any person.'),
-        bullet('Posting or displaying sexually explicit or violent material.'),
-        bullet(
-          'Personal or political attacks, public or private, directed at community members.',
-        ),
-        bullet(
-          'Other conduct that could reasonably be considered inappropriate in a professional setting.',
-        ),
-        h2('Event Conduct'),
         body(
-          'At Flutter Birmingham events, attendees are expected to behave professionally and '
-          'courteously at all times. Venue staff, event organisers, and speakers are to be '
-          'treated with respect. Any behaviour that disrupts the event or makes other attendees '
-          'feel unsafe may result in removal from the event without warning or refund.',
+          'Our event staff can usually be identified by special badges/attire. '
+          'Our zero tolerance policy means that we will look into and review '
+          'every allegation of violation of this Code of Conduct and respond '
+          'appropriately. Please note, while we take all concerns raised '
+          'seriously, we will use our discretion as to determining when and how '
+          'to follow up on reported incidents, and may decline to take any '
+          'further action and/or may direct the participant to other resources '
+          'for resolution.',
         ),
-        h2('Reporting a Concern'),
         body(
-          'If you experience or witness unacceptable behaviour, or have any concerns, '
-          'please report it to a Flutter Birmingham organiser as soon as possible. '
-          'At in-person events, you can approach any organiser directly. You may also '
-          'report concerns by email to:',
+          'Event staff will be happy to help participants contact hotel/venue '
+          'security or local law enforcement, provide escorts, or otherwise '
+          'assist those experiencing discomfort or harassment to feel safe for '
+          'the duration of the event. We value your attendance.',
+        ),
+        body(
+          'Exhibiting partners, sponsors or vendor booths, or similar activities '
+          'are also subject to this policy. In particular, exhibitors should not '
+          'use sexualised images, activities, or other material. Booth staff '
+          '(including volunteers) should not use sexualised '
+          'clothing/uniforms/costumes, or otherwise create a sexualised '
+          'environment. Participants and exhibiting partners or sponsors '
+          'disobeying this policy will be notified and are expected to stop any '
+          'offending behaviour immediately.',
+        ),
+        h2('Why this policy is important'),
+        body(
+          'Harassment at events and in online communities is unfortunately '
+          'common. Creating an official policy aims to improve this by making it '
+          'clear that harassment of anyone for any reason is not acceptable '
+          'within our events and communities. This policy may prevent '
+          'harassment by clearly defining expectations for behaviour, aims to '
+          'provide reassurance, and encourages people who have had bad '
+          'experiences at other events to participate in this one.',
+        ),
+        h2('Reporting a concern'),
+        body(
+          'At a Flutter Birmingham event, speak to any organiser. You can also '
+          'email the organisers at any time:',
         ),
         Container(
           padding: const EdgeInsets.all(AppSpacing.md),
@@ -202,58 +295,24 @@ class _CoCContent extends StatelessWidget {
                     AppStrings.conductEmail,
                     subject: 'Code of Conduct report',
                   ),
-                  child: Text(
-                    AppStrings.conductEmail,
-                    style: theme.textTheme.bodyMedium?.copyWith(
-                      color: AppColors.flutterBlue,
-                      fontWeight: FontWeight.w600,
-                      decoration: TextDecoration.underline,
-                      decorationColor: AppColors.flutterBlue,
-                    ),
-                  ),
+                  child: Text(AppStrings.conductEmail, style: linkStyle),
                 ),
               ),
             ],
           ),
         ),
-        h2('Confidentiality'),
+        h2('Licence and attribution'),
         body(
-          'All reports will be handled with discretion. We will not share identifying '
-          'information about the reporter without their explicit consent. We are committed '
-          'to protecting reporters from retaliation.',
+          'This policy is licensed under the Creative Commons Zero licence. It '
+          'is based on the GDG event code of conduct.',
         ),
-        h2('Enforcement'),
-        body(
-          'Flutter Birmingham organisers will review all reports and take whatever action '
-          'they deem appropriate. This may include a warning, removal from an event, '
-          'or a ban from future events. In cases involving illegal activity, we will '
-          'cooperate with relevant authorities.',
-        ),
-        body(
-          'We are committed to applying this Code of Conduct fairly and consistently. '
-          'Organisers who violate the Code of Conduct may face the same consequences '
-          'as other community members.',
-        ),
-        h2('Contact'),
-        body(
-          'For any questions about this Code of Conduct or to make a report, please contact '
-          'the Flutter Birmingham team. Our contact details are available on the Contact page.',
-        ),
-        const SizedBox(height: AppSpacing.lg),
-        Container(
-          padding: const EdgeInsets.all(AppSpacing.md),
-          decoration: BoxDecoration(
-            color: AppColors.lightGrey,
-            borderRadius: BorderRadius.circular(AppSpacing.buttonRadius),
-          ),
-          child: Text(
-            'This Code of Conduct was last updated in 2024 and will be reviewed annually. '
-            'It is inspired by, but independent of, the Google Developer Community guidelines '
-            'and the Contributor Covenant.',
-            style: theme.textTheme.bodySmall?.copyWith(
-              color: AppColors.neutralGrey,
-            ),
-          ),
+        Wrap(
+          spacing: AppSpacing.lg,
+          runSpacing: AppSpacing.xs,
+          children: [
+            link('Creative Commons Zero (CC0)', _cc0Url),
+            link('GDG event code of conduct', _gdgUrl),
+          ],
         ),
       ],
     );

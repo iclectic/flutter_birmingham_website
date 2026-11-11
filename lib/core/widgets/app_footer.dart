@@ -21,6 +21,7 @@ const _columns = <String, List<_FooterLink>>{
     _FooterLink('Meetup', url: AppStrings.meetupUrl),
     _FooterLink('LinkedIn', url: AppStrings.linkedInUrl),
     _FooterLink('YouTube', url: AppStrings.youTubeUrl),
+    _FooterLink('X', url: AppStrings.xUrl),
     _FooterLink('Bluesky', url: AppStrings.blueskyUrl),
     _FooterLink('GitHub', url: AppStrings.gitHubUrl),
   ],

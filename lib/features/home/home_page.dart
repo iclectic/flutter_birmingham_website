@@ -41,7 +41,7 @@ class _Hero extends StatelessWidget {
     final headline = Text.rich(
       TextSpan(
         children: [
-          const TextSpan(text: 'Build beautiful apps.\n'),
+          const TextSpan(text: 'Building with Flutter?\n'),
           WidgetSpan(
             alignment: PlaceholderAlignment.baseline,
             baseline: TextBaseline.alphabetic,
@@ -50,7 +50,7 @@ class _Hero extends StatelessWidget {
                 colors: [AppColors.sky, AppColors.purple],
               ).createShader(bounds),
               child: Text(
-                'Together, in Birmingham.',
+                'Come and meet the rest of us.',
                 style: theme.textTheme.displayLarge?.copyWith(
                   color: AppColors.white,
                   fontSize: isMobile ? 40 : 64,
@@ -232,16 +232,17 @@ class _Events extends StatelessWidget {
           children: [
             const SectionHeading(
               eyebrow: 'Events',
-              title: 'Join us at the next meetup',
+              title: 'Come along to the next one',
               subtitle:
-                  'Every meetup is announced on Meetup. RSVP there for the '
-                  'date, venue and speakers, and to save your spot.',
+                  'We post every meetup on Meetup.com. That\'s where you\'ll find '
+                  'the date, the venue and who\'s speaking. Please RSVP there so '
+                  'we know how many people are coming.',
             ),
             const SizedBox(height: AppSpacing.xl),
             FilledButton.icon(
               onPressed: () => UrlService.open(AppStrings.meetupUrl),
               icon: const Icon(Icons.event_outlined, size: 20),
-              label: const Text('See upcoming events on Meetup'),
+              label: const Text('Find the next meetup'),
             ),
           ],
         ),
@@ -262,22 +263,26 @@ const _features = [
   _Feature(
     Icons.mic_none_rounded,
     'Talks',
-    'Deep dives and lightning talks from local and visiting Flutter '
-        'developers — architecture, performance, design, Dart and more.',
+    'Local developers, and the odd visitor, talking about what '
+        'they\'ve built and what they\'ve learnt along the way. '
+        'Anything from app architecture to performance to handy Dart '
+        'tricks.',
     AppColors.sky,
   ),
   _Feature(
     Icons.code_rounded,
     'Workshops',
-    'Hands-on sessions where you bring a laptop and build something real, '
-        'from your first widget to advanced state management.',
+    'Bring a laptop and build something with us. Some sessions are '
+        'made for beginners. Others go deeper into things like state '
+        'management and testing.',
     AppColors.purple,
   ),
   _Feature(
     Icons.forum_outlined,
-    'Networking',
-    'Meet the people building with Flutter across the West Midlands. '
-        'Swap ideas, find collaborators and maybe your next role.',
+    'Meeting people',
+    'Get to know other people working with Flutter around the West '
+        'Midlands. Swap ideas, get a second opinion on that bug, or '
+        'find your next job.',
     AppColors.blue,
   ),
 ];
@@ -295,10 +300,10 @@ class _WhatWeDo extends StatelessWidget {
             const SectionHeading(
               alignment: CrossAxisAlignment.center,
               eyebrow: 'What we do',
-              title: 'Learn, build and share',
+              title: 'What happens at a meetup',
               subtitle:
-                  'Every meetup is free, friendly and open to all '
-                  'experience levels.',
+                  'Every meetup is free, and you don\'t need to be an expert to '
+                  'come.',
             ),
             const SizedBox(height: AppSpacing.xxl),
             ResponsiveGrid(
@@ -363,16 +368,17 @@ class _GetInvolved extends StatelessWidget {
       (
         Icons.record_voice_over_outlined,
         'Give a talk',
-        'First-time speakers are very welcome. We\'ll help you shape your idea '
-            'into a great talk.',
+        'Never given a talk before? That\'s fine. Send us your idea and '
+            'we\'ll help you shape it.',
         'Submit a talk',
         () => UrlService.open(AppStrings.speakerFormUrl),
       ),
       (
         Icons.apartment_outlined,
         'Host a meetup',
-        'Have space for 40–80 developers in Birmingham? Put your company in '
-            'front of the local Flutter community.',
+        'Got room for 40 to 80 developers somewhere in Birmingham? '
+            'Hosting us is a good way to get your company known by local '
+            'Flutter developers.',
         'Offer a venue',
         () => UrlService.openEmail(
           AppStrings.contactEmail,
@@ -382,8 +388,8 @@ class _GetInvolved extends StatelessWidget {
       (
         Icons.volunteer_activism_outlined,
         'Sponsor',
-        'Food, drinks and swag keep our events free. Sponsors get a shout-out '
-            'at every meetup.',
+        'Sponsors cover the food and drinks, which is how we keep every '
+            'meetup free. We\'ll thank you at each event.',
         'Become a sponsor',
         () => UrlService.openEmail(
           AppStrings.contactEmail,
@@ -399,10 +405,10 @@ class _GetInvolved extends StatelessWidget {
           children: [
             const SectionHeading(
               eyebrow: 'Get involved',
-              title: 'This community is built by you',
+              title: 'Help us run it',
               subtitle:
-                  'Speak, host or sponsor and help Flutter grow in '
-                  'Birmingham.',
+                  'Flutter Birmingham depends on speakers, venues and sponsors. '
+                  'Here\'s how you can help.',
             ),
             const SizedBox(height: AppSpacing.xxl),
             ResponsiveGrid(
@@ -487,11 +493,7 @@ class _Resources extends StatelessWidget {
       'https://flutter.dev',
     ),
     ('dart.dev', 'The language behind Flutter.', 'https://dart.dev'),
-    (
-      'DartPad',
-      'Write and run Flutter in your browser.',
-      'https://dartpad.dev',
-    ),
+    ('DartPad', 'Try Dart and Flutter in your browser.', 'https://dartpad.dev'),
     ('pub.dev', 'Packages for Flutter and Dart.', 'https://pub.dev'),
   ];
 
@@ -506,11 +508,11 @@ class _Resources extends StatelessWidget {
           children: [
             const SectionHeading(
               eyebrow: 'New to Flutter?',
-              title: 'Start building today',
+              title: 'Where to start',
               subtitle:
-                  'Flutter is Google\'s open source framework for '
-                  'building beautiful, natively compiled apps for mobile, web, '
-                  'desktop and embedded from a single codebase.',
+                  'Flutter is Google\'s open-source toolkit for building apps for '
+                  'mobile, web and desktop from one codebase. These are the '
+                  'places we\'d send a friend first.',
             ),
             const SizedBox(height: AppSpacing.xl),
             ResponsiveGrid(
@@ -584,7 +586,7 @@ class _JoinBanner extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                'Join the Flutter Birmingham community',
+                'Don\'t miss the next meetup',
                 textAlign: TextAlign.center,
                 style: theme.textTheme.displaySmall?.copyWith(
                   color: AppColors.white,
@@ -593,7 +595,8 @@ class _JoinBanner extends StatelessWidget {
               ),
               const SizedBox(height: AppSpacing.md),
               Text(
-                'Get notified about new meetups, talks and workshops.',
+                'Join the group on Meetup and you\'ll get an email whenever a '
+                'new one is announced.',
                 textAlign: TextAlign.center,
                 style: theme.textTheme.bodyLarge?.copyWith(
                   color: AppColors.white.withAlpha(220),

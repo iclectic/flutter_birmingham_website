@@ -2,12 +2,14 @@ abstract final class AppStrings {
   static const String appName = 'Flutter Birmingham';
   static const String shortName = 'Flutter Brum';
   static const String tagline =
-      'The Flutter & Dart community for Birmingham and the West Midlands.';
+      'A meetup for Flutter and Dart developers in Birmingham and the '
+      'West Midlands.';
   static const String description =
-      'Flutter Birmingham is a free, independent meetup for anyone building '
-      'with Flutter and Dart. We get together for talks, hands-on workshops '
-      'and good conversation — whether you shipped your first app last week '
-      'or have been building with Flutter since the beta.';
+      'Flutter Birmingham is a free meetup for anyone who builds with '
+      'Flutter and Dart. We get together in Birmingham for talks, '
+      'workshops and a good chat afterwards. Maybe you\'ve just '
+      'written your first widget. Maybe you\'ve been shipping Flutter '
+      'apps for years. Either way, you\'ll fit right in.';
 
   static const List<String> hashtags = [
     '#FlutterBrum',
@@ -21,6 +23,7 @@ abstract final class AppStrings {
   static const String linkedInUrl =
       'https://www.linkedin.com/company/146899611/';
   static const String youTubeUrl = 'https://www.youtube.com/@Flutterbrum';
+  static const String xUrl = 'https://x.com/flutterbrum';
   static const String blueskyUrl =
       'https://bsky.app/profile/flutterbirmingham.bsky.social';
   static const String gitHubUrl =
