@@ -1,0 +1,47 @@
+# Hostinger (LiteSpeed / Apache) config for the Flutter Web build.
+# Copied to the document root as part of build/web.
+
+Options -Indexes
+DirectoryIndex index.html
+
+<IfModule mod_mime.c>
+  AddType application/wasm .wasm
+  AddType text/javascript .js .mjs
+  AddType application/manifest+json .webmanifest
+</IfModule>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Canonical host: flutterbirmingham.co.uk -> www.flutterbirmingham.co.uk
+  RewriteCond %{HTTP_HOST} ^flutterbirmingham\.co\.uk$ [NC]
+  RewriteRule ^ https://www.flutterbirmingham.co.uk%{REQUEST_URI} [R=301,L]
+
+  # Events are run on Meetup.
+  RewriteRule ^events(/.*)?$ https://www.meetup.com/flutter-birmingham/ [R=302,L]
+
+  # SPA fallback for app routes (/team, /code-of-conduct). Paths with a file
+  # extension are left alone so missing files return a real 404.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} !\.[A-Za-z0-9]+$
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  # Cross-origin isolation lets the wasm renderer use multiple threads.
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+  Header always set Cross-Origin-Embedder-Policy "credentialless"
+
+  # Flutter output file names are not content-hashed, so the entry points
+  # must be revalidated on every load or visitors get stale builds.
+  <FilesMatch "\.(html|js|mjs|wasm|json)$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+  <FilesMatch "\.(png|jpe?g|webp|gif|svg|ico|ttf|otf|woff2?)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+</IfModule>
