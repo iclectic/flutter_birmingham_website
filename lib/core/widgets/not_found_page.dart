@@ -28,10 +28,11 @@ class NotFoundPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: AppSpacing.md),
-              const SectionHeading(title: 'Page Not Found'),
+              const SectionHeading(title: 'Page not found'),
               const SizedBox(height: AppSpacing.md),
               const Text(
-                'The page you are looking for does not exist or has been moved.',
+                'We couldn\'t find that page. It may have moved, or the link '
+                'might be wrong.',
                 textAlign: TextAlign.center,
                 style: TextStyle(color: AppColors.neutralGrey),
               ),
@@ -39,7 +40,7 @@ class NotFoundPage extends StatelessWidget {
               ElevatedButton.icon(
                 onPressed: () => context.go('/'),
                 icon: const Icon(Icons.home_outlined),
-                label: const Text('Back to Home'),
+                label: const Text('Back to the home page'),
               ),
             ],
           ),

@@ -34,7 +34,8 @@ class CodeOfConductPage extends StatelessWidget {
                 eyebrow: 'COMMUNITY',
                 title: 'Code of Conduct',
                 subtitle:
-                    'Flutter Birmingham is dedicated to providing a safe, inclusive, and respectful experience for everyone.',
+                    'We want everyone to feel safe and welcome at our events. This '
+                    'is what we expect from everyone who comes along.',
                 light: true,
               ),
             ),
@@ -175,7 +176,7 @@ class _CoCContent extends StatelessWidget {
               'orientation, disabilities, neurodiversity, physical appearance, '
               'body size, ethnicity, nationality, race, age, religion, or other '
               'protected category. Treat everyone with respect. Participate '
-              'while acknowledging that everyone deserves to be here — and each '
+              'while acknowledging that everyone deserves to be here, and each '
               'of us has the right to enjoy our experience without fear of '
               'harassment, discrimination, or condescension, whether blatant or '
               "via micro-aggressions. Jokes shouldn't demean others. Consider "
@@ -188,9 +189,9 @@ class _CoCContent extends StatelessWidget {
           'Harassment is not tolerated, and you are empowered to politely '
               'engage when you or others are disrespected. The person making '
               'you feel uncomfortable may not be aware of what they are doing, '
-              'and politely bringing their behavior to their attention is '
+              'and politely bringing their behaviour to their attention is '
               'encouraged. If a participant engages in harassing or '
-              'uncomfortable behavior, the event organizers may take any action '
+              'uncomfortable behaviour, the event organisers may take any action '
               'they deem appropriate, including warning or expelling the '
               'offender from the event with no refund. If you are being '
               'harassed or feel uncomfortable, notice that someone else is being '
@@ -209,12 +210,12 @@ class _CoCContent extends StatelessWidget {
               'stalking; following; harassing photography or recording; '
               'sustained disruption of talks or other events; offensive verbal '
               'language; inappropriate physical contact; and unwelcome sexual '
-              'attention. Participants asked to stop any harassing behavior are '
+              'attention. Participants asked to stop any harassing behaviour are '
               'expected to comply immediately.',
         ),
         numbered(
           4,
-          'Practice saying "Yes and" to each other.',
+          'Practise saying "Yes and" to each other.',
           "It's a theatre improv technique to build on each other's ideas. We "
               'all benefit when we create together.',
         ),
@@ -228,7 +229,7 @@ class _CoCContent extends StatelessWidget {
           'includes, but is not limited to, attendees behaving in a disorderly '
           'manner or failing to comply with this policy, and the terms and '
           'conditions herein. If a participant engages in harassing or '
-          'uncomfortable behavior, the event organizers may take any action '
+          'uncomfortable behaviour, the event organisers may take any action '
           'they deem appropriate, including warning or expelling the offender '
           'from the event with no refund.',
         ),
@@ -251,12 +252,12 @@ class _CoCContent extends StatelessWidget {
         body(
           'Exhibiting partners, sponsors or vendor booths, or similar activities '
           'are also subject to this policy. In particular, exhibitors should not '
-          'use sexualized images, activities, or other material. Booth staff '
-          '(including volunteers) should not use sexualized '
-          'clothing/uniforms/costumes, or otherwise create a sexualized '
+          'use sexualised images, activities, or other material. Booth staff '
+          '(including volunteers) should not use sexualised '
+          'clothing/uniforms/costumes, or otherwise create a sexualised '
           'environment. Participants and exhibiting partners or sponsors '
           'disobeying this policy will be notified and are expected to stop any '
-          'offending behavior immediately.',
+          'offending behaviour immediately.',
         ),
         h2('Why this policy is important'),
         body(
@@ -264,7 +265,7 @@ class _CoCContent extends StatelessWidget {
           'common. Creating an official policy aims to improve this by making it '
           'clear that harassment of anyone for any reason is not acceptable '
           'within our events and communities. This policy may prevent '
-          'harassment by clearly defining expectations for behavior, aims to '
+          'harassment by clearly defining expectations for behaviour, aims to '
           'provide reassurance, and encourages people who have had bad '
           'experiences at other events to participate in this one.',
         ),
@@ -300,9 +301,9 @@ class _CoCContent extends StatelessWidget {
             ],
           ),
         ),
-        h2('License and attribution'),
+        h2('Licence and attribution'),
         body(
-          'This policy is licensed under the Creative Commons Zero license. It '
+          'This policy is licensed under the Creative Commons Zero licence. It '
           'is based on the GDG event code of conduct.',
         ),
         Wrap(

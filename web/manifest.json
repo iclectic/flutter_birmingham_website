@@ -5,7 +5,7 @@
     "display": "standalone",
     "background_color": "#FFFFFF",
     "theme_color": "#0553B1",
-    "description": "Flutter Birmingham — Flutter and Dart community meetup in Birmingham, UK.",
+    "description": "A meetup for Flutter and Dart developers in Birmingham, UK.",
     "lang": "en-GB",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,

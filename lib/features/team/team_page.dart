@@ -26,8 +26,8 @@ class TeamPage extends ConsumerWidget {
           eyebrow: 'Team',
           title: 'Meet the Flutter Birmingham team',
           subtitle:
-              'Flutter Birmingham is run by volunteers who love Flutter, '
-              'Dart and the developer community in the West Midlands.',
+              'Flutter Birmingham is run by volunteers who work with Flutter '
+              'day to day. Come and say hello at the next meetup.',
         ),
         PageSection(
           child: ContentContainer(
@@ -51,8 +51,9 @@ class TeamPage extends ConsumerWidget {
                   alignment: CrossAxisAlignment.center,
                   title: 'Want to help run Flutter Birmingham?',
                   subtitle:
-                      'We\'re always happy to hear from people who want '
-                      'to help with events, speakers, venues or sponsorship.',
+                      'We could always use an extra pair of hands, whether that\'s on '
+                      'the night, finding speakers or tracking down a venue. Drop us '
+                      'an email.',
                 ),
                 const SizedBox(height: AppSpacing.lg),
                 FilledButton.icon(
