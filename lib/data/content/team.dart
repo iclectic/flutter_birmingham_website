@@ -30,5 +30,6 @@ const List<TeamMember> team = [
     bio: 'Software Engineer | Power Platform Developer',
     photoAsset: 'assets/images/team/oluwabukunmi_rufus.jpg',
     linkedInUrl: 'https://www.linkedin.com/in/oluwabukunmi-rufus-761015256/',
+    gitHubUrl: 'https://github.com/Rufusbhekay',
   ),
 ];

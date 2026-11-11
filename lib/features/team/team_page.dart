@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../app/providers.dart';
 import '../../core/constants/app_colors.dart';
@@ -143,19 +144,27 @@ class TeamMemberCard extends StatelessWidget {
                 children: [
                   if (member.websiteUrl != null)
                     _SocialLink(
-                      icon: Icons.public_rounded,
+                      icon: const Icon(Icons.public_rounded, size: 20),
                       url: member.websiteUrl!,
                       tooltip: 'Website',
                     ),
                   if (member.gitHubUrl != null)
                     _SocialLink(
-                      icon: Icons.code_rounded,
+                      icon: const FaIcon(
+                        FontAwesomeIcons.github,
+                        size: 20,
+                        color: _gitHubColor,
+                      ),
                       url: member.gitHubUrl!,
                       tooltip: 'GitHub',
                     ),
                   if (member.linkedInUrl != null)
                     _SocialLink(
-                      icon: Icons.work_outline_rounded,
+                      icon: const FaIcon(
+                        FontAwesomeIcons.linkedin,
+                        size: 20,
+                        color: _linkedInColor,
+                      ),
                       url: member.linkedInUrl!,
                       tooltip: 'LinkedIn',
                     ),
@@ -231,20 +240,23 @@ class _Avatar extends StatelessWidget {
   }
 }
 
+const _gitHubColor = Color(0xFF181717);
+const _linkedInColor = Color(0xFF0A66C2);
+
 class _SocialLink extends StatelessWidget {
   const _SocialLink({
     required this.icon,
     required this.url,
     required this.tooltip,
   });
-  final IconData icon;
+  final Widget icon;
   final String url;
   final String tooltip;
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: Icon(icon, size: 20),
+      icon: icon,
       color: AppColors.body,
       tooltip: tooltip,
       onPressed: () => UrlService.open(url),
