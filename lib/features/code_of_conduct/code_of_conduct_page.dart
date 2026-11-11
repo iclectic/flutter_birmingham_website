@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 import '../../core/constants/app_colors.dart';
+import '../../core/constants/app_strings.dart';
 import '../../core/constants/app_spacing.dart';
 import '../../core/responsive/breakpoints.dart';
 import '../../core/responsive/responsive_layout.dart';
 import '../../core/widgets/section_heading.dart';
+import '../../services/url_service.dart';
 
 class CodeOfConductPage extends StatelessWidget {
   const CodeOfConductPage({super.key});
@@ -194,17 +196,21 @@ class _CoCContent extends StatelessWidget {
                 size: 18,
               ),
               const SizedBox(width: AppSpacing.sm),
-              Text(
-                'conduct@flutterbirmingham.dev',
-                style: theme.textTheme.bodyMedium?.copyWith(
-                  color: AppColors.flutterBlue,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              Text(
-                '  [PLACEHOLDER — replace with a real address before launch]',
-                style: theme.textTheme.bodySmall?.copyWith(
-                  color: AppColors.neutralGrey,
+              Flexible(
+                child: InkWell(
+                  onTap: () => UrlService.openEmail(
+                    AppStrings.conductEmail,
+                    subject: 'Code of Conduct report',
+                  ),
+                  child: Text(
+                    AppStrings.conductEmail,
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: AppColors.flutterBlue,
+                      fontWeight: FontWeight.w600,
+                      decoration: TextDecoration.underline,
+                      decorationColor: AppColors.flutterBlue,
+                    ),
+                  ),
                 ),
               ),
             ],

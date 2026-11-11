@@ -73,10 +73,6 @@ Edit `lib/data/content/team.dart`. Put photos in `assets/images/team/`. To fill 
 ### Links and copy
 URLs, emails and copy live in `lib/core/constants/app_strings.dart`.
 
-## Before launch
-
-- Confirm `hello@` / `conduct@flutterbirmingham.dev` exist (the site is on `flutterbirmingham.co.uk`), or change them in `app_strings.dart`.
-
 ## Deployment (Hostinger)
 
 Production is https://www.flutterbirmingham.co.uk, hosted on Hostinger.

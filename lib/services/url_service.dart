@@ -13,10 +13,12 @@ class UrlService {
   }
 
   static Future<void> openEmail(String address, {String? subject}) async {
-    final uri = Uri(
-      scheme: 'mailto',
-      path: address,
-      queryParameters: subject != null ? {'subject': subject} : null,
+    // Built by hand: Uri.queryParameters encodes spaces as '+', which mail
+    // clients show literally.
+    final uri = Uri.parse(
+      subject == null
+          ? 'mailto:$address'
+          : 'mailto:$address?subject=${Uri.encodeComponent(subject)}',
     );
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri);
