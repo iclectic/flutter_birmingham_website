@@ -75,7 +75,6 @@ URLs, emails and copy live in `lib/core/constants/app_strings.dart`.
 
 ## Before launch
 
-- Replace `AppStrings.speakerFormUrl` (currently a placeholder Google Form).
 - Confirm `hello@` / `conduct@flutterbirmingham.dev` exist (the site is on `flutterbirmingham.co.uk`), or change them in `app_strings.dart`.
 
 ## Deployment (Hostinger)

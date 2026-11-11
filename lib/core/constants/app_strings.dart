@@ -17,7 +17,7 @@ abstract final class AppStrings {
     '#Birmingham',
   ];
 
-  // TODO(organisers): replace placeholder links before launch.
+  // TODO(organisers): confirm the contact and conduct mailboxes exist.
   static const String meetupUrl = 'https://www.meetup.com/flutter-birmingham/';
   static const String linkedInUrl =
       'https://www.linkedin.com/company/146899611/';
@@ -28,7 +28,8 @@ abstract final class AppStrings {
       'https://github.com/iclectic/flutter_birmingham_website';
   static const String contactEmail = 'hello@flutterbirmingham.dev';
   static const String conductEmail = 'conduct@flutterbirmingham.dev';
-  static const String speakerFormUrl = 'https://forms.gle/your-speaker-form-id';
+  static const String speakerFormUrl =
+      'https://docs.google.com/forms/d/e/1FAIpQLSe4cQX-DFlKlkfnHEaUJeAQFeyw9eUJwqUfRZqhEmno9o-FKA/viewform';
 
   static const String independentNotice =
       'Flutter Birmingham is an independent community group. Flutter and the '
